@@ -466,7 +466,7 @@ if ownsAsset then
 end`
     },
     {
-      id: "svc-workshop", name: "OTM:WorkshopService", desc: "OTM engine's workshop / marketplace service for community-made products.",
+      id: "svc-workshop", name: "OTM:WorkshopService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "OTM engine's workshop / marketplace service for community-made products.",
       methods: [
         { sig: "GetAllProducts()", returns: "Table", desc: "Returns every product listed on the workshop.", params: [] },
         { sig: "UploadAsset(data)", returns: "None", desc: "Uploads a custom model to the workshop.", params: [] },
@@ -770,7 +770,9 @@ LoadCharacter(player, true) -- respawns at original position` },
 { id: "fn-isplayerrigged", name: "IsPlayerRigged", desc: "Checks if the player is loaded in fully.", sig: "IsPlayerRigged(player)", returns: "None",
       example: `local player = game.Players.Unknownblocky
 
-IsPlayerRigged(player) -- checks if the player is fully loaded in with a character otherwise returns false.` }
+IsPlayerRigged(player) -- checks if the player is fully loaded in with a character otherwise returns false.` },
+{ id: "fn-setpeacetime", name: "SetPeaceTime", desc: "Sets the servers peace time status.", sig: "SetPeaceTime(Bool)", returns: "None",
+      example: `SetPeaceTime(true) -- Turns peace time on preventing players from shooting.` }
   ],
 
   events: [
