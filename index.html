@@ -157,8 +157,7 @@
   }
   .card.in-view{animation:fadeInUp .5s ease forwards;}
   .card:hover{background:var(--bg-subtle);margin:0 -20px;padding:32px 20px;border-radius:10px;}
-  section#services-top .card:first-of-type,
-  .card:first-child{border-top:none;padding-top:0;}
+  section .card:first-child{border-top:none;padding-top:0;}
   .card:first-child:hover{padding-top:0;}
   .card-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:6px;}
   .card-head h3{font-size:18px;font-weight:700;margin:0;font-family:'JetBrains Mono',monospace;letter-spacing:-.01em;}
@@ -179,6 +178,7 @@
   .sig-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px;}
   .sig{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:var(--text);}
   .sig .p{color:var(--text-dim);font-weight:400;}
+  .sig-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
   .returns{
     font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-dim);
     background:var(--pill-bg);border:1px solid var(--pill-border);border-radius:5px;padding:2px 8px;white-space:nowrap;
@@ -294,62 +294,27 @@
 
     <div class="nav-group">
       <div class="nav-group-title">Custom Services</div>
-      <a class="nav-link" href="#svc-otm">OTM (root)</a>
-      <a class="nav-link" href="#svc-datastore">DataStoreService</a>
-      <a class="nav-link" href="#svc-engine">EngineService</a>
-      <a class="nav-link" href="#svc-marketplace">MarketplaceService</a>
-      <a class="nav-link" href="#svc-workshop">WorkshopService</a>
-      <a class="nav-link" href="#svc-insert">InsertService</a>
-      <a class="nav-link" href="#svc-notification">NotificationService</a>
-      <a class="nav-link" href="#svc-moderation">ModerationService</a>
-      <a class="nav-link" href="#svc-addon">AddonService</a>
-      <a class="nav-link" href="#svc-http">HTTPService</a>
-      <a class="nav-link" href="#svc-starterpack">StarterPack</a>
-      <a class="nav-link" href="#svc-anticheat">AntiCheatService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-messaging">MessagingService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-job">JobService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-teams">Teams <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-vehicle">VehicleService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-property">PropertyService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-weather">WeatherService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-award">AwardService <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#svc-reserved">Reserved services</a>
+      <div id="nav-services"></div>
     </div>
 
     <div class="nav-group">
       <div class="nav-group-title">Custom Functions</div>
-      <a class="nav-link" href="#fn-getpdrank">GetPDRankAsync</a>
-      <a class="nav-link" href="#fn-getselectedchar">GetSelectedChar</a>
-      <a class="nav-link" href="#fn-explode">Explode</a>
-      <a class="nav-link" href="#fn-webhook">Webhook</a>
-      <a class="nav-link" href="#fn-returnusertomenu">ReturnUserToMenu</a>
-      <a class="nav-link" href="#fn-getusercredits">GetUserCredits</a>
-      <a class="nav-link" href="#fn-unequiptool">UnequipTool</a>
-      <a class="nav-link" href="#fn-getcharacterdata">GetCharacterData</a>
-      <a class="nav-link" href="#fn-setpdrank">SetPDRank</a>
-      <a class="nav-link" href="#fn-setcharacterkill">SetCharacterKill</a>
-      <a class="nav-link" href="#fn-loadcharacter">LoadCharacter</a>
+      <div id="nav-functions"></div>
     </div>
 
     <div class="nav-group">
       <div class="nav-group-title">Custom Events</div>
-      <a class="nav-link" href="#ev-onbulletshot">OnBulletShot <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#ev-oncharacterdeath">OnCharacterDeath <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#ev-oncharacterloaded">OnCharacterLoaded <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#ev-onragdoll">OnRagdoll <span class="nav-flag">WIP</span></a>
+      <div id="nav-events"></div>
     </div>
 
     <div class="nav-group">
       <div class="nav-group-title">Add-on Events</div>
-      <a class="nav-link" href="#addon-doordash">DoorDash <span class="nav-flag">WIP</span></a>
-      <a class="nav-link" href="#addon-playmusic">Play Music <span class="nav-flag">WIP</span></a>
+      <div id="nav-addonevents"></div>
     </div>
 
     <div class="nav-group">
       <div class="nav-group-title">Plugin Creation</div>
-      <a class="nav-link" href="#plugin-api">Plugin API</a>
-      <a class="nav-link" href="#plugin-event">Event Object</a>
-      <a class="nav-link" href="#plugin-example">Full Example</a>
+      <div id="nav-plugin"></div>
     </div>
   </aside>
 
@@ -369,776 +334,804 @@
 
       <div class="callout"><b>How do I insert a script?</b>
       Right-click the target object in the Explorer, then search the Insert menu: <code>Script</code> for a server script, or <code>Local Script</code> / <code>Module Script</code> for their respective types.</div>
+
+      <div class="callout"><b>Maintaining this page</b>
+      Everything below is rendered from a single <code>DATA</code> table at the top of the page's script. To add or edit a service, function, or event, edit that table — no markup required.</div>
     </section>
 
     <section id="restricted">
       <h2>Restricted Items</h2>
       <p class="section-intro">Prevented functions, events, and services during script development. Their OTM-prefixed counterparts (e.g. <code>OTM:DataStoreService</code>) are the sandbox-safe replacements.</p>
-      <div class="restricted-list">
-        <div class="restricted-item">TeleportService</div>
-        <div class="restricted-item">DataStoreService</div>
-        <div class="restricted-item">ServerScriptService</div>
-        <div class="restricted-item">MarketplaceService</div>
-        <div class="restricted-item">MemoryStoreService</div>
-        <div class="restricted-item">HttpService</div>
-        <div class="restricted-item">MessagingService</div>
-        <div class="restricted-item">ReplicatedStorage</div>
-        <div class="restricted-item">ReplicatedFirst</div>
-        <div class="restricted-item">StarterPlayer</div>
-        <div class="restricted-item">Teams</div>
-        <div class="restricted-item">MaterialService</div>
-      </div>
+      <div class="restricted-list" id="restricted-list"></div>
     </section>
 
     <section id="services-top">
       <h2>Custom Services</h2>
       <p class="section-intro">Every service is fetched through the <code>otm</code> root object, then called like any Roblox service.</p>
-
-      <article class="card" id="svc-otm">
-        <div class="card-head"><h3>OTM</h3></div>
-        <p class="desc">Root engine service — the entry point for retrieving every other service.</p>
-
-        <div class="method">
-          <div class="sig-row"><span class="sig">GetService(<span class="p">serviceName</span>)</span><span class="returns">Table</span></div>
-          <table class="params"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody><tr><td>serviceName</td><td class="type">String</td><td>Returns the requested service.</td></tr></tbody></table>
-        </div>
-        <div class="method">
-          <div class="sig-row"><span class="sig">GetServices()</span><span class="returns">Table</span></div>
-          <p class="mdesc">Lists all current services.</p>
-        </div>
-        <div class="method">
-          <div class="sig-row"><span class="sig">FindService(<span class="p">serviceName</span>)</span><span class="returns">Table | nil</span></div>
-          <table class="params"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody><tr><td>serviceName</td><td class="type">String</td><td>Same as <code>GetService</code>, but returns <code>nil</code> instead of erroring if it doesn't exist.</td></tr></tbody></table>
-        </div>
-
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> dss = otm:<span class="fname">GetService</span>(ServiceName) <span class="cmt">-- gets the requested service</span>
-<span class="kw">local</span> allServices = otm:<span class="fname">GetServices</span>() <span class="cmt">-- gets all existing services</span>
-<span class="kw">local</span> serviceExists = otm:<span class="fname">FindService</span>(ServiceName) <span class="cmt">-- nil if it doesn't exist</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-datastore">
-        <div class="card-head"><h3>OTM:DataStoreService</h3></div>
-        <p class="desc">The sandbox-safe replacement for Roblox's <code>DataStoreService</code>.</p>
-        <div class="method">
-          <div class="sig-row"><span class="sig">GetDataStore(<span class="p">name</span>)</span><span class="returns">Datastore</span></div>
-          <table class="params"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody><tr><td>name</td><td class="type">String</td><td>Returns the datastore named <code>SERVERNAME_YOURNAME</code>.</td></tr></tbody></table>
-        </div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> dss = otm:<span class="fname">GetService</span>(<span class="str">"OTM:DataStoreService"</span>)
-<span class="kw">local</span> mainStore = dss:<span class="fname">GetDataStore</span>(<span class="str">"mainStore"</span>)
-
-game.Players.PlayerAdded:Connect(<span class="kw">function</span>(plr)
-    mainStore:SetAsync(plr.UserId, <span class="kw">true</span>) <span class="cmt">-- true when the player joins</span>
-<span class="kw">end</span>)
-
-game.Players.PlayerRemoving:Connect(<span class="kw">function</span>(plr)
-    mainStore:SetAsync(plr.UserId, <span class="kw">false</span>) <span class="cmt">-- false when the player leaves</span>
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-engine">
-        <div class="card-head"><h3>OTM:EngineService</h3></div>
-        <p class="desc">The engine's main core service — session and load-state info.</p>
-        <div class="method"><div class="sig-row"><span class="sig">InMapEditor()</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the current session is in the map editor.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">IsServerLoaded()</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the server has fully finished loading.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">WebhookEnabled()</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether a webhook has been set up on the server.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> engine = otm:<span class="fname">GetService</span>(<span class="str">"OTM:EngineService"</span>)
-
-<span class="kw">if</span> engine:<span class="fname">InMapEditor</span>() <span class="kw">then</span>
-    <span class="kw">return</span> <span class="cmt">-- skip gameplay logic while in the map editor</span>
-<span class="kw">end</span>
-
-<span class="kw">if</span> engine:<span class="fname">IsServerLoaded</span>() <span class="kw">and</span> engine:<span class="fname">WebhookEnabled</span>() <span class="kw">then</span>
-    print(<span class="str">"Server ready, webhook logging is active."</span>)
-<span class="kw">end</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-marketplace">
-        <div class="card-head"><h3>OTM:MarketplaceService</h3></div>
-        <p class="desc">Prompts and asset-ownership checks, mirroring Roblox's <code>MarketplaceService</code>.</p>
-        <div class="method"><div class="sig-row"><span class="sig">PromptGamepass(<span class="p">player, gamepassId</span>)</span><span class="returns">None</span></div><p class="mdesc">Prompts the given Roblox gamepass to the user.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">PromptProduct(<span class="p">player, productId</span>)</span><span class="returns">None</span></div><p class="mdesc">Prompts the given Roblox developer product to the user.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UserOwnsAsset(<span class="p">player, assetId</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Checks whether the Roblox user owns the given asset.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">ImportPaidContent(<span class="p">rpmId</span>)</span><span class="returns">None</span> <span class="badge wip">WIP</span></div><p class="mdesc">Inserts a paid RPM asset via a custom ID.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetPaidContentInfo(<span class="p">rpmId</span>)</span><span class="returns">Table</span> <span class="badge wip">WIP</span></div><p class="mdesc">Returns info for a paid RPM asset via its custom ID.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UserOwnsPaidContent(<span class="p">player, rpmId</span>)</span><span class="returns">Bool</span> <span class="badge wip">WIP</span></div><p class="mdesc">Returns whether the asset is owned.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> mps = otm:<span class="fname">GetService</span>(<span class="str">"OTM:MarketPlaceService"</span>)
-<span class="kw">local</span> player = game.Players.Unknownblocky
-<span class="kw">local</span> gamepassId = 0
-<span class="kw">local</span> productId = 0
-<span class="kw">local</span> rpmId = 0
-<span class="kw">local</span> assetId = 0
-
-<span class="kw">local</span> ownsAsset = mps:<span class="fname">UserOwnsPaidContent</span>(player, rpmId)
-
-mps:<span class="fname">PromptGamepass</span>(player, gamepassId)
-mps:<span class="fname">PromptProduct</span>(player, productId)
-
-<span class="kw">if</span> ownsAsset <span class="kw">then</span>
-    <span class="kw">local</span> asset = mps:<span class="fname">ImportPaidContent</span>(rpmId)
-    <span class="kw">local</span> assetInfo = mps:<span class="fname">GetPaidContentInfo</span>(rpmId)
-    <span class="kw">local</span> ownsAssetV2 = mps:<span class="fname">UserOwnsAsset</span>(player, assetId)
-    print(asset)
-    print(assetInfo)
-<span class="kw">end</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-workshop">
-        <div class="card-head"><h3>OTM:WorkshopService</h3></div>
-        <p class="desc">OTM engine's workshop / marketplace service for community-made products.</p>
-        <div class="method"><div class="sig-row"><span class="sig">GetAllProducts()</span><span class="returns">Table</span></div><p class="mdesc">Returns every product listed on the workshop.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UploadAsset(<span class="p">data</span>)</span><span class="returns">None</span></div><p class="mdesc">Uploads a custom model to the workshop.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetProductInfo(<span class="p">productName, creator</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns info about the given product.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetUserProducts(<span class="p">player</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns every product created by that user.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">PromptAssetPurchase(<span class="p">player, productData</span>)</span><span class="returns">None</span></div><p class="mdesc">Prompts a purchase for the given asset.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> workshop = otm:<span class="fname">GetService</span>(<span class="str">"OTM:WorkshopService"</span>)
-<span class="kw">local</span> products = workshop:<span class="fname">GetAllProducts</span>()
-print(<span class="str">"#products:"</span>, #products)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-insert">
-        <div class="card-head"><h3>OTM:InsertService</h3></div>
-        <p class="desc">Loads catalog content into the game.</p>
-        <div class="method"><div class="sig-row"><span class="sig">LoadAsset(<span class="p">assetId</span>)</span><span class="returns">Model</span></div><p class="mdesc">Loads the given asset (must be a free, on-sale catalog model).</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetFreeModelsAsync(<span class="p">searchText, pageNumber</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns free models matching the search text and page.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetFreeDecalsAsync(<span class="p">searchText, pageNumber</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns free decals matching the search text and page.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> insert = otm:<span class="fname">GetService</span>(<span class="str">"OTM:InsertService"</span>)
-<span class="kw">local</span> model = insert:<span class="fname">LoadAsset</span>(0) <span class="cmt">-- asset id here</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-notification">
-        <div class="card-head"><h3>OTM:NotificationService</h3></div>
-        <p class="desc">Server announcements and on-screen messages.</p>
-        <div class="method"><div class="sig-row"><span class="sig">SendAnnouncement(<span class="p">message</span>)</span><span class="returns">None</span></div><p class="mdesc">Sends a server-wide announcement.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">SendRPMessage(<span class="p">player, message, duration</span>)</span><span class="returns">None</span></div><p class="mdesc">Sends an on-screen RP message (same style as the megaphone).</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">SendClientNotification(<span class="p">player, message, timeAmount, type</span>)</span><span class="returns">None</span></div><p class="mdesc"><code>type</code> is one of <code>Success</code>, <code>Error</code>, <code>Information</code>, <code>Warning</code>.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> notifyService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:NotificationService"</span>)
-<span class="kw">local</span> player = game.Players.Unknownblocky
-
-notifyService:<span class="fname">SendAnnouncement</span>(<span class="str">"Hello world!"</span>)
-notifyService:<span class="fname">SendRPMessage</span>(player, <span class="str">"Hello world!"</span>, 3)
-notifyService:<span class="fname">SendClientNotification</span>(player, <span class="str">"Hello world!"</span>, 3, <span class="str">"Success"</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-moderation">
-        <div class="card-head"><h3>OTM:ModerationService</h3></div>
-        <p class="desc">Bans, unbans, and admin/moderation history.</p>
-        <div class="method"><div class="sig-row"><span class="sig">BanAsync(<span class="p">banner, userId, duration, reason</span>)</span><span class="returns">None</span></div><p class="mdesc">Bans the given user.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UnbanAsync(<span class="p">userId</span>)</span><span class="returns">None</span></div><p class="mdesc">Unbans the given user.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">ModerationHistory(<span class="p">userId</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns the user's moderation history.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">IsAdmin(<span class="p">player</span>)</span><span class="returns">String | nil</span></div><p class="mdesc">Returns the user's admin rank, or <code>nil</code> if none.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UserBannedAsync(<span class="p">userId</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the user is currently banned.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnUserBan(<span class="p">userId, duration, reason</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Event — fires with a user's ban details.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> modService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:ModerationService"</span>)
-<span class="kw">local</span> plr = game.Players.Unknownblocky
-<span class="kw">local</span> userId = plr.UserId
-<span class="kw">local</span> banDuration = 3600 <span class="cmt">-- 1 hour, in seconds</span>
-<span class="kw">local</span> banReason = <span class="str">"OTM STUDIOS"</span>
-
-<span class="kw">local</span> isAdmin = modService:<span class="fname">IsAdmin</span>(plr)
-print(isAdmin) <span class="cmt">-- e.g. "OTM Staff"</span>
-
-modService:<span class="fname">BanAsync</span>(plr, userId, banDuration, banReason)
-modService:<span class="fname">UnbanAsync</span>(userId)
-modService:<span class="fname">ModerationHistory</span>(userId)
-modService:<span class="fname">UserBannedAsync</span>(userId)
-
-modService.OnUserBan:Connect(<span class="kw">function</span>(bannedUserId, duration, reason)
-    <span class="kw">local</span> username = game.Players:GetNameFromUserId(bannedUserId)
-    print(username .. <span class="str">" was banned for:"</span>, duration, <span class="str">"Reason:"</span>, reason)
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-addon">
-        <div class="card-head"><h3>OTM:AddonService</h3></div>
-        <p class="desc">Connects your script to installed paid add-ons.</p>
-        <div class="method"><div class="sig-row"><span class="sig">GetAddon(<span class="p">name</span>)</span><span class="returns">Table</span></div><p class="mdesc">Imports the given add-on's functions/events into your script.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">AddonEnabled(<span class="p">name</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Checks if the server currently has the add-on enabled — useful for checking whether it's running or owned.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetAddonInfo(<span class="p">name</span>)</span><span class="returns">Table</span> <span class="badge wip">WIP</span></div><p class="mdesc">Returns info about the given add-on.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RestartAddon(<span class="p">name</span>)</span><span class="returns">None</span> <span class="badge wip">WIP</span> <span class="badge paid">Owner-only</span></div><p class="mdesc">Restarts the given add-on. Errors if you don't own it.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">StopAddon(<span class="p">name</span>)</span><span class="returns">None</span> <span class="badge wip">WIP</span> <span class="badge paid">Owner-only</span></div><p class="mdesc">Stops the given add-on. Errors if you don't own it.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">StartAddon(<span class="p">name</span>)</span><span class="returns">None</span> <span class="badge wip">WIP</span> <span class="badge paid">Owner-only</span></div><p class="mdesc">Starts the given add-on. Errors if you don't own it.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> addonService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:AddonService"</span>)
-<span class="kw">local</span> currentAddon = <span class="str">"test_addon"</span>
-
-<span class="kw">local</span> testAddon = addonService:<span class="fname">GetAddon</span>(currentAddon)
-<span class="kw">local</span> addonEnabled = addonService:<span class="fname">AddonEnabled</span>(currentAddon)
-<span class="kw">local</span> addonInfo = addonService:<span class="fname">GetAddonInfo</span>(currentAddon)
-
-print(addonEnabled) <span class="cmt">-- true/false: enabled (owned)</span>
-print(addonInfo) <span class="cmt">-- {Creator = "D4RK", Price = 0, Description = "Hello world!"}</span>
-
-<span class="kw">if</span> addonEnabled <span class="kw">then</span>
-    addonService:<span class="fname">StopAddon</span>(currentAddon)
-<span class="kw">end</span>
-
-addonService:<span class="fname">StartAddon</span>(currentAddon)
-addonService:<span class="fname">RestartAddon</span>(currentAddon)
-
-testAddon.Changed:Connect(<span class="kw">function</span>(arg1) <span class="cmt">-- add-ons expose their own functions/events</span>
-    print(arg1)
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-http">
-        <div class="card-head"><h3>OTM:HTTPService</h3></div>
-        <p class="desc">Sandbox-safe HTTP requests and encoding utilities.</p>
-        <div class="method"><div class="sig-row"><span class="sig">PostAsync(<span class="p">url</span>)</span><span class="returns">None</span></div><p class="mdesc">Posts a message to a URL.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetAsync(<span class="p">url</span>)</span><span class="returns">None</span></div><p class="mdesc">Gets data from a URL.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GenerateGUID(<span class="p">wrapInBraces</span>)</span><span class="returns">String</span></div><p class="mdesc">Returns a random unique string every call.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">JSONEncode(<span class="p">data</span>)</span><span class="returns">String</span></div><p class="mdesc">Encodes a table as a Base64 string.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">JSONDecode(<span class="p">data</span>)</span><span class="returns">Table</span></div><p class="mdesc">Decodes a Base64 string back to its original table.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> http = otm:<span class="fname">GetService</span>(<span class="str">"OTM:HTTPService"</span>)
-<span class="kw">local</span> randomString = http:<span class="fname">GenerateGUID</span>(<span class="kw">false</span>)
-<span class="cmt">-- e.g. "a9f8d72f87asmg8d8ics"</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-starterpack">
-        <div class="card-head"><h3>OTM:StarterPack</h3></div>
-        <p class="desc">Manages what players spawn with.</p>
-        <div class="method"><div class="sig-row"><span class="sig">AddItem(<span class="p">toolName, amount</span>)</span><span class="returns">None</span></div><p class="mdesc">Adds the tool to the game's StarterPack.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemoveItem(<span class="p">toolName</span>)</span><span class="returns">None</span></div><p class="mdesc">Removes the tool from the StarterPack.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">FindItem(<span class="p">toolName</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Checks whether the item exists in the StarterPack.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">AddOneTimeItem(<span class="p">toolName, amount</span>)</span><span class="returns">None</span></div><p class="mdesc">Gives the item to a character only once per player. Passing "cash"/"bank" with an amount grants cash instead.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemoveOneTimeItem(<span class="p">toolName</span>)</span><span class="returns">None</span></div><p class="mdesc">Removes the item from the one-time list.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">FindOneTimeItem(<span class="p">toolName</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Checks whether the item exists in the one-time list.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> starterPack = otm:<span class="fname">GetService</span>(<span class="str">"OTM:StarterPack"</span>)
-<span class="kw">local</span> item = game.ReplicatedStorage[<span class="str">"g17"</span>]
-
-<span class="kw">local</span> foundItem = starterPack:<span class="fname">FindItem</span>(item)
-
-<span class="kw">if</span> foundItem == <span class="kw">false</span> <span class="kw">then</span>
-    starterPack:<span class="fname">AddItem</span>(item, 30) <span class="cmt">-- spawns with a G17, 30 rounds</span>
-    starterPack:<span class="fname">AddOneTimeItem</span>(item, 30) <span class="cmt">-- only given once per player</span>
-<span class="kw">end</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-anticheat">
-        <div class="card-head"><h3>OTM:AntiCheatService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Anti-cheat flags, history, and whitelisting.</p>
-        <div class="method"><div class="sig-row"><span class="sig">IsEnabled()</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether anti-cheat is toggled on. Default: <code>true</code>.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetUserFlags(<span class="p">userId</span>)</span><span class="returns">Number</span></div><p class="mdesc">Returns the user's anti-cheat detection flag count.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetUserHistory(<span class="p">userId</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns the user's anti-cheat moderation history.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Whitelist(<span class="p">userId</span>)</span><span class="returns">None</span></div><p class="mdesc">Whitelists a user, preventing them from being flagged.</p></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> acService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:AntiCheat"</span>)
-<span class="kw">local</span> isEnabled = acService:<span class="fname">IsEnabled</span>()
-
-<span class="kw">for</span> _, player <span class="kw">in</span> ipairs(game.Players:GetPlayers()) <span class="kw">do</span>
-    <span class="kw">local</span> flags = acService:<span class="fname">GetUserFlags</span>(player.UserId)
-    <span class="kw">local</span> history = acService:<span class="fname">GetUserHistory</span>(player.UserId)
-    print(flags) <span class="cmt">-- number of anti-cheat flags on this user</span>
-<span class="kw">end</span></code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="svc-messaging">
-        <div class="card-head"><h3>OTM:MessagingService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Cross-server communication.</p>
-        <div class="method"><div class="sig-row"><span class="sig">SendData(<span class="p">data</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Sends data to another server, if it's alive.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RequestData(<span class="p">data</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Requests data from another server, if it's alive.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">AllowRequestData(<span class="p">serverName</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Allows a server to request data from this one.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">DenyRequestData(<span class="p">serverName</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Blacklists a server from requesting data.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnDataRecieved(<span class="p">serverName, data</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Event — fires when another server sends data to yours.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnRequestRecieved(<span class="p">serverName, request</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Event — fires when another server requests data (auto-denies if blacklisted).</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> messageService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:MessagingService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-job">
-        <div class="card-head"><h3>OTM:JobService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Job assignment and management.</p>
-        <div class="method"><div class="sig-row"><span class="sig">SetJob(<span class="p">jobName</span>)</span><span class="returns">None</span></div><p class="mdesc">Sets the user's current job status.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Fire(<span class="p">player</span>)</span><span class="returns">None</span></div><p class="mdesc">Fires the user from their job, if employed.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">CreateNewJob(<span class="p">jobData</span>)</span><span class="returns">None</span></div><p class="mdesc">Creates a new job.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemoveCurrentJob(<span class="p">jobName</span>)</span><span class="returns">None</span></div><p class="mdesc">Deletes the job, if it exists.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">JobExist(<span class="p">jobName</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Checks whether the job exists.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UpdateCurrentJob(<span class="p">jobName, jobData</span>)</span><span class="returns">None</span></div><p class="mdesc">Updates the job's data.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> jobService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:JobService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-teams">
-        <div class="card-head"><h3>OTM:Teams</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Sandbox-safe replacement for Roblox's <code>Teams</code> service.</p>
-        <div class="method"><div class="sig-row"><span class="sig">CreateNewTeam(<span class="p">teamData</span>)</span><span class="returns">None</span></div><p class="mdesc">Creates a new team.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemoveCurrentTeam(<span class="p">teamName</span>)</span><span class="returns">None</span></div><p class="mdesc">Removes the team, if it exists.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">FindCurrentTeam(<span class="p">teamName</span>)</span><span class="returns">Table | nil</span></div><p class="mdesc">Returns the team's data, or <code>nil</code>.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UpdateTeamData(<span class="p">teamName, teamData</span>)</span><span class="returns">None</span></div><p class="mdesc">Updates the team's data.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">IsOnTeam(<span class="p">player</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the player is on a team.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> teams = otm:<span class="fname">GetService</span>(<span class="str">"OTM:Teams"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-vehicle">
-        <div class="card-head"><h3>OTM:VehicleService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Vehicle spawning, locking, and cleanup.</p>
-        <div class="method"><div class="sig-row"><span class="sig">LockVehicle(<span class="p">vehicle, lockStatus</span>)</span><span class="returns">None</span></div><p class="mdesc">Locks or unlocks the vehicle.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">ExplodeVehicle(<span class="p">vehicle</span>)</span><span class="returns">None</span></div><p class="mdesc">Explodes the vehicle.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemovePlayerVehicles(<span class="p">player</span>)</span><span class="returns">None</span></div><p class="mdesc">Removes all vehicles spawned by the player.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">SpawnVehicle(<span class="p">vehicle, vehicleData</span>)</span><span class="returns">None</span></div><p class="mdesc">Spawns the vehicle with custom attributes.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">LockpickCar(<span class="p">vehicle, lockpickStatus</span>)</span><span class="returns">None</span></div><p class="mdesc">Sets the vehicle's current lockpick status.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">ClearAllVehicles()</span><span class="returns">None</span></div><p class="mdesc">Clears all vehicles in the workspace.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> vehicleService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:VehicleService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-property">
-        <div class="card-head"><h3>OTM:PropertyService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Player-owned property management.</p>
-        <div class="method"><div class="sig-row"><span class="sig">SellProperty(<span class="p">propertyName</span>)</span><span class="returns">None</span></div><p class="mdesc">Sells the property, if owned.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetAllProperties()</span><span class="returns">Table</span></div><p class="mdesc">Returns every property in the experience.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GiveUserProperty(<span class="p">userId</span>)</span><span class="returns">None</span></div><p class="mdesc">Gives the user the property.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">WipeStorage(<span class="p">propertyName</span>)</span><span class="returns">None</span></div><p class="mdesc">Wipes all storages on the property.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetAllStorages(<span class="p">propertyName</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns all storages on the property.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UserOwnsProperty(<span class="p">propertyName</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the user owns the property.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetPropertyData(<span class="p">propertyName</span>)</span><span class="returns">Table</span></div><p class="mdesc">Returns the property's data, including house lock, ID, and more.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> propertyService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:PropertyService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-weather">
-        <div class="card-head"><h3>OTM:WeatherService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">World weather and time-of-day control.</p>
-        <div class="method"><div class="sig-row"><span class="sig">SetWeather(<span class="p">weatherType</span>)</span><span class="returns">None</span></div><p class="mdesc">Sets the current weather.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">ResetWeather()</span><span class="returns">None</span></div><p class="mdesc">Resets weather to default.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">SetTimeOfDay(<span class="p">timeOfDay</span>)</span><span class="returns">None</span></div><p class="mdesc">Sets the current time of day.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnWeatherChanged(<span class="p">oldWeather, newWeather</span>)</span></div><p class="mdesc">Event — fires when the weather changes.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetTime()</span><span class="returns">Number</span></div><p class="mdesc">Returns the current in-game time.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetWeather()</span><span class="returns">String</span></div><p class="mdesc">Returns the current in-game weather.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">StartDisaster(<span class="p">disasterType</span>)</span><span class="badge wip">WIP</span></div><p class="mdesc">Sets the current disaster.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">EndDisaster()</span><span class="badge wip">WIP</span></div><p class="mdesc">Stops the current disaster.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> weatherService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:WeatherService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-award">
-        <div class="card-head"><h3>OTM:AwardService</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Awards players medals for in-game actions.</p>
-        <div class="method"><div class="sig-row"><span class="sig">CreateAward(<span class="p">name</span>)</span><span class="returns">None</span></div><p class="mdesc">Creates a new award.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RemoveAward(<span class="p">name</span>)</span><span class="returns">None</span></div><p class="mdesc">Removes an award, if it exists.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetAllRewards()</span><span class="returns">Table</span></div><p class="mdesc">Returns every award created.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GiveAward(<span class="p">name, player</span>)</span><span class="returns">None</span></div><p class="mdesc">Assigns the award to the player.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">UserHasAward(<span class="p">name, player</span>)</span><span class="returns">Bool</span></div><p class="mdesc">Returns whether the player has the award.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RewardRecieved(<span class="p">player, name</span>)</span></div><p class="mdesc">Event — fires when a reward is given.</p></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> awardService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:AwardService"</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="svc-reserved">
-        <div class="card-head"><h3>Reserved services</h3> <span class="badge reserved">Not documented</span></div>
-        <p class="desc"><code>OTM:DarkService</code> and <code>OTM:PH</code> are reserved namespaces in the source doc with no finished methods yet — placeholders for future services.</p>
-      </article>
+      <div id="content-services"></div>
     </section>
 
     <section id="functions-top">
       <h2>Custom Functions</h2>
       <p class="section-intro">Global functions available directly in any script — no <code>GetService</code> call needed.</p>
-
-      <article class="card" id="fn-getpdrank">
-        <div class="card-head"><h3>GetPDRankAsync</h3></div>
-        <p class="desc">Returns the police department rank of the given player.</p>
-        <div class="sig-row"><span class="sig">GetPDRankAsync(<span class="p">player</span>)</span><span class="returns">Number</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> plr = game.Players.Unknownblocky
-GetPDRankAsync(plr) <span class="cmt">-- returns: 3</span></code></pre></div>
-      </article>
-
-      <article class="card" id="fn-getselectedchar">
-        <div class="card-head"><h3>GetSelectedChar</h3></div>
-        <p class="desc">Returns the currently selected character of the given player.</p>
-        <div class="sig-row"><span class="sig">GetSelectedChar(<span class="p">player</span>)</span><span class="returns">String | nil</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> plr = game.Players.Unknownblocky
-GetSelectedChar(plr) <span class="cmt">-- "CharacterOne", "CharacterTwo", or nil</span></code></pre></div>
-      </article>
-
-      <article class="card" id="fn-explode">
-        <div class="card-head"><h3>Explode</h3></div>
-        <p class="desc">Creates an explosion with custom parameters.</p>
-        <div class="sig-row"><span class="sig">Explode(<span class="p">position, size, radius, damage</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> position = Vector3.new(0, 0, 0)
-<span class="kw">local</span> size = 25
-<span class="kw">local</span> radius = 30
-<span class="kw">local</span> damage = 150
-
-Explode(position, size, radius, damage)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="fn-webhook">
-        <div class="card-head"><h3>Webhook</h3></div>
-        <p class="desc">Sends a formatted webhook message to Discord.</p>
-        <div class="sig-row"><span class="sig">Webhook(<span class="p">webhookURL, title, description, imageId</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code>OnCharacterDeath:Connect(<span class="kw">function</span>(player)
-    <span class="kw">local</span> webhookURL = <span class="str">"discord.com/webhookrandomstrings"</span>
-    <span class="kw">local</span> title = <span class="str">"DEATH LOG"</span>
-    <span class="kw">local</span> description = player.Name .. <span class="str">" has died."</span>
-    <span class="kw">local</span> imageId = <span class="kw">nil</span>
-
-    Webhook(webhookURL, title, description, imageId)
-    <span class="cmt">-- runs every time a player dies</span>
-<span class="kw">end</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="fn-returnusertomenu">
-        <div class="card-head"><h3>ReturnUserToMenu</h3></div>
-        <p class="desc">Returns the given player to the RoleplayM menu.</p>
-        <div class="sig-row"><span class="sig">ReturnUserToMenu(<span class="p">player</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> player = game.Players.Unknownblocky
-ReturnUserToMenu(player)</code></pre></div>
-      </article>
-
-      <article class="card" id="fn-getusercredits">
-        <div class="card-head"><h3>GetUserCredits</h3></div>
-        <p class="desc">Returns the given user's credit balance.</p>
-        <div class="sig-row"><span class="sig">GetUserCredits(<span class="p">userId</span>)</span><span class="returns">Number</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> userId = game.Players.Unknownblocky.UserId
-GetUserCredits(userId)</code></pre></div>
-      </article>
-
-      <article class="card" id="fn-unequiptool">
-        <div class="card-head"><h3>UnequipTool</h3></div>
-        <p class="desc">Unequips the player's currently held tool.</p>
-        <div class="sig-row"><span class="sig">UnequipTool(<span class="p">player, tool</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> player = game.Players.Unknownblocky
-<span class="kw">local</span> tool = player.Character:FindFirstChildWhichIsA(<span class="str">"Tool"</span>)
-UnequipTool(player, tool)</code></pre></div>
-      </article>
-
-      <article class="card" id="fn-getcharacterdata">
-        <div class="card-head"><h3>GetCharacterData</h3></div>
-        <p class="desc">Returns the given RP character's data.</p>
-        <div class="sig-row"><span class="sig">GetCharacterData(<span class="p">player, rpChar</span>)</span><span class="returns">Table</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> player = game.Players.Unknownblocky
-<span class="kw">local</span> rpChar = player.CurrentChar.Value
-print(GetCharacterData(player, rpChar)) <span class="cmt">-- prints char data table</span></code></pre></div>
-      </article>
-
-      <article class="card" id="fn-setpdrank">
-        <div class="card-head"><h3>SetPDRank</h3></div>
-        <p class="desc">Sets the given player's police department rank.</p>
-        <div class="sig-row"><span class="sig">SetPDRank(<span class="p">player, rank</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> player = game.Players.Unknownblocky
-<span class="kw">local</span> rank = 3
-SetPDRank(player, rank) <span class="cmt">-- sets rank to 3 (military)</span></code></pre></div>
-      </article>
-
-      <article class="card" id="fn-setcharacterkill">
-        <div class="card-head"><h3>SetCharacterKill</h3></div>
-        <p class="desc">Sets the server's current character-kill state — a.k.a. "Realistic RP."</p>
-        <div class="sig-row"><span class="sig">SetCharacterKill(<span class="p">toggle</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> ckToggle = <span class="kw">true</span>
-SetCharacterKill(ckToggle) <span class="cmt">-- turns character kill on</span></code></pre></div>
-      </article>
-
-      <article class="card" id="fn-loadcharacter">
-        <div class="card-head"><h3>LoadCharacter</h3></div>
-        <p class="desc">Reloads the given player's RP character.</p>
-        <div class="sig-row"><span class="sig">LoadCharacter(<span class="p">player, tpBack</span>)</span><span class="returns">None</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code><span class="kw">local</span> player = game.Players.Unknownblocky
-
-LoadCharacter(player) <span class="cmt">-- respawns character</span>
-LoadCharacter(player, <span class="kw">true</span>) <span class="cmt">-- respawns at original position</span></code></pre></div>
-      </article>
+      <div id="content-functions"></div>
     </section>
 
     <section id="events-top">
       <h2>Custom Events</h2>
       <p class="section-intro">Global events, connected the same way as any Roblox signal.</p>
-
-      <article class="card" id="ev-onbulletshot">
-        <div class="card-head"><h3>OnBulletShot</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Fires when a bullet is shot in the world.</p>
-        <div class="sig-row"><span class="sig">OnBulletShot:Connect(function(<span class="p">player, tool, hit</span>))</span></div>
-        <div class="example">
-          <div class="example-label">Example</div>
-          <pre><code><span class="kw">local</span> whitelistedDevs = {<span class="str">"Unknownblocky"</span>, <span class="str">"Zeolah"</span>}
-<span class="kw">local</span> blacklistedTools = {<span class="str">"Taser"</span>}
-
-OnBulletShot:Connect(<span class="kw">function</span>(player, tool, hit)
-    <span class="kw">if</span> hit == <span class="kw">nil</span> <span class="kw">then</span> <span class="kw">return</span> <span class="kw">end</span>
-    <span class="kw">if</span> table.find(blacklistedTools, tool.Name) <span class="kw">then</span> <span class="kw">return</span> <span class="kw">end</span>
-
-    <span class="kw">if</span> table.find(whitelistedDevs, player.Name) <span class="kw">then</span>
-        Explode(hit, 25, 30, 150) <span class="cmt">-- exploding bullets for devs</span>
-    <span class="kw">end</span>
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="ev-oncharacterdeath">
-        <div class="card-head"><h3>OnCharacterDeath</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Fires when a player's currently selected character dies.</p>
-        <div class="sig-row"><span class="sig">OnCharacterDeath:Connect(function(<span class="p">player</span>))</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code>OnCharacterDeath:Connect(<span class="kw">function</span>(player)
-    <span class="kw">if</span> player.Name == <span class="str">"Unknownblocky"</span> <span class="kw">then</span>
-        print(<span class="str">"OTM Staff has died."</span>)
-    <span class="kw">end</span>
-<span class="kw">end</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="ev-oncharacterloaded">
-        <div class="card-head"><h3>OnCharacterLoaded</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Fires when a player's currently selected character (re)spawns.</p>
-        <div class="sig-row"><span class="sig">OnCharacterLoaded:Connect(function(<span class="p">player</span>))</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code>OnCharacterLoaded:Connect(<span class="kw">function</span>(player)
-    <span class="kw">if</span> player.Name == <span class="str">"Unknownblocky"</span> <span class="kw">then</span>
-        print(<span class="str">"OTM Staff has loaded in."</span>)
-    <span class="kw">end</span>
-<span class="kw">end</span>)</code></pre></div>
-      </article>
-
-      <article class="card" id="ev-onragdoll">
-        <div class="card-head"><h3>OnRagdoll</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Fires when a player's character ragdolls.</p>
-        <div class="sig-row"><span class="sig">OnRagdoll:Connect(function(<span class="p">player, ragdollValue</span>))</span></div>
-        <div class="example"><div class="example-label">Example</div><pre><code>OnRagdoll:Connect(<span class="kw">function</span>(player, ragdollValue)
-    <span class="kw">if</span> player.Name == <span class="str">"Unknownblocky"</span> <span class="kw">and</span> ragdollValue == <span class="kw">true</span> <span class="kw">then</span>
-        print(<span class="str">"OTM Staff has ragdolled."</span>)
-    <span class="kw">end</span>
-<span class="kw">end</span>)</code></pre></div>
-      </article>
+      <div id="content-events"></div>
     </section>
 
     <section id="addons-top">
       <h2>Custom Events — Add-ons</h2>
       <p class="section-intro">Add-on events are reached through <code>OTM:AddonService</code>, not the global namespace.</p>
-
-      <article class="card" id="addon-doordash">
-        <div class="card-head"><h3>DoorDash</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">Food-delivery job add-on.</p>
-        <div class="method">
-          <div class="example-label">Initializer</div>
-          <pre><code><span class="kw">local</span> addonService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:AddonService"</span>)
-<span class="kw">local</span> ddAddon = addonService:<span class="fname">GetAddon</span>(<span class="str">"Doordash_Script"</span>)</code></pre>
-        </div>
-        <div class="method"><div class="sig-row"><span class="sig">OnFoodDelivered(<span class="p">player, cash</span>)</span></div><p class="mdesc">Fires when a player finishes delivering food to an NPC.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RecievedOrder(<span class="p">player, npc</span>)</span></div><p class="mdesc">Fires when a player receives an order from an NPC.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Applied(<span class="p">player</span>)</span></div><p class="mdesc">Fires when a player starts the job.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Leave(<span class="p">player</span>)</span></div><p class="mdesc">Fires when a player leaves the job.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Timeup(<span class="p">player</span>)</span></div><p class="mdesc">Fires when a player fails to deliver in time.</p></div>
-        <div class="example">
-          <div class="example-label">Example — all events</div>
-          <pre><code>ddAddon.OnFoodDelivered:Connect(<span class="kw">function</span>(player, cash)
-    print(player, cash)
-<span class="kw">end</span>)
-
-ddAddon.RecievedOrder:Connect(<span class="kw">function</span>(player, npc)
-    print(player, npc)
-<span class="kw">end</span>)
-
-ddAddon.Applied:Connect(<span class="kw">function</span>(player)
-    print(player)
-<span class="kw">end</span>)
-
-ddAddon.Leave:Connect(<span class="kw">function</span>(player)
-    print(player)
-<span class="kw">end</span>)
-
-ddAddon.Timeup:Connect(<span class="kw">function</span>(player)
-    print(player)
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
-
-      <article class="card" id="addon-playmusic">
-        <div class="card-head"><h3>Play Music</h3> <span class="badge wip">In progress</span></div>
-        <p class="desc">In-world music playback add-on.</p>
-        <div class="method">
-          <div class="example-label">Initializer</div>
-          <pre><code><span class="kw">local</span> addonService = otm:<span class="fname">GetService</span>(<span class="str">"OTM:AddonService"</span>)
-<span class="kw">local</span> musicAddon = addonService:<span class="fname">GetAddon</span>(<span class="str">"PlayMusic"</span>)</code></pre>
-        </div>
-        <div class="method"><div class="sig-row"><span class="sig">Toggled(<span class="p">player, toggle</span>)</span></div><p class="mdesc">Fires when a user turns the music on or off.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Changed(<span class="p">player, newId, oldId</span>)</span></div><p class="mdesc">Fires when a user changes the music ID.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">VolumeChanged(<span class="p">player, newVolume, oldVolume</span>)</span></div><p class="mdesc">Fires when a user changes the volume.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">MinDistanceChanged(<span class="p">player, newDistance, oldDistance</span>)</span></div><p class="mdesc">Fires when a user changes the minimum audible distance.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">MaxDistanceChanged(<span class="p">player, newDistance, oldDistance</span>)</span></div><p class="mdesc">Fires when a user changes the maximum audible distance.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">PlaybackSpeedChanged(<span class="p">player, newSpeed, oldSpeed</span>)</span></div><p class="mdesc">Fires when a user changes the playback speed.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">PitchChanged(<span class="p">player, newPitch, oldPitch</span>)</span></div><p class="mdesc">Fires when a user changes the pitch.</p></div>
-        <div class="example">
-          <div class="example-label">Example — all events</div>
-          <pre><code>musicAddon.Toggled:Connect(<span class="kw">function</span>(player, toggle)
-    print(player, toggle)
-<span class="kw">end</span>)
-
-musicAddon.Changed:Connect(<span class="kw">function</span>(player, newId, oldId)
-    print(player, newId, oldId)
-<span class="kw">end</span>)
-
-musicAddon.VolumeChanged:Connect(<span class="kw">function</span>(player, newVolume, oldVolume)
-    print(player, newVolume, oldVolume)
-<span class="kw">end</span>)
-
-musicAddon.MinDistanceChanged:Connect(<span class="kw">function</span>(player, newDistance, oldDistance)
-    print(player, newDistance, oldDistance)
-<span class="kw">end</span>)
-
-musicAddon.MaxDistanceChanged:Connect(<span class="kw">function</span>(player, newDistance, oldDistance)
-    print(player, newDistance, oldDistance)
-<span class="kw">end</span>)
-
-musicAddon.PlaybackSpeedChanged:Connect(<span class="kw">function</span>(player, newSpeed, oldSpeed)
-    print(player, newSpeed, oldSpeed)
-<span class="kw">end</span>)
-
-musicAddon.PitchChanged:Connect(<span class="kw">function</span>(player, newPitch, oldPitch)
-    print(player, newPitch, oldPitch)
-<span class="kw">end</span>)</code></pre>
-        </div>
-      </article>
+      <div id="content-addonevents"></div>
     </section>
 
     <section id="plugins-top">
       <h2>Plugin Creation</h2>
       <p class="section-intro">Build custom plugins that extend the OTM Engine itself.</p>
-
-      <article class="card" id="plugin-api">
-        <div class="card-head"><h3>Plugin API</h3></div>
-        <p class="desc">Methods available on the <code>api</code> argument passed into a plugin's <code>Init(self, api)</code>.</p>
-        <div class="method"><div class="sig-row"><span class="sig">RegisterService(<span class="p">name, impl</span>)</span><span class="returns">None</span></div><p class="mdesc">Registers a table as an OTM service, callable via <code>otm:GetService(name)</code>.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RegisterFunction(<span class="p">name, func</span>)</span><span class="returns">None</span></div><p class="mdesc">Adds a global function available inside every executed script.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">RegisterEvent(<span class="p">name, existingEvent</span>)</span><span class="returns">OTMEvent</span></div><p class="mdesc">Creates (or wraps) a named event, retrievable via <code>otm:GetEvent(name)</code>.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetEvent(<span class="p">name</span>)</span><span class="returns">OTMEvent | nil</span></div><p class="mdesc">Returns a previously registered event, or <code>nil</code>.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnBeforeExecute(<span class="p">fn</span>)</span><span class="returns">None</span></div><p class="mdesc">Registers a hook that fires right before every user execution, receiving the player and their code.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">OnAfterExecute(<span class="p">fn</span>)</span><span class="returns">None</span></div><p class="mdesc">Registers a hook that fires right after every execution, receiving the player, success, elapsed time, and error.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Log(<span class="p">msg</span>)</span><span class="returns">None</span></div><p class="mdesc">Prints a message tagged with the plugin's name.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Warn(<span class="p">msg</span>)</span><span class="returns">None</span></div><p class="mdesc">Warns a message tagged with the plugin's name.</p></div>
-      </article>
-
-      <article class="card" id="plugin-event">
-        <div class="card-head"><h3>Event Object</h3></div>
-        <p class="desc">Returned by <code>api:RegisterEvent</code>, <code>otm:CreateEvent</code>, and <code>otmEvent.new</code> — the same event type used throughout the engine.</p>
-        <div class="method"><div class="sig-row"><span class="sig">Connect(<span class="p">callback</span>)</span><span class="returns">Connection</span></div><p class="mdesc">Runs the callback every time the event fires.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Once(<span class="p">callback</span>)</span><span class="returns">Connection</span></div><p class="mdesc">Runs the callback the next time the event fires, then disconnects itself.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Wait()</span><span class="returns">...</span></div><p class="mdesc">Yields the current thread until the event fires, then returns its arguments.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">Fire(<span class="p">...</span>)</span><span class="returns">None</span></div><p class="mdesc">Fires the event, running every connected callback with the given arguments.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">DisconnectAll()</span><span class="returns">None</span></div><p class="mdesc">Disconnects every listener on the event.</p></div>
-        <div class="method"><div class="sig-row"><span class="sig">GetConnectionCount()</span><span class="returns">Number</span></div><p class="mdesc">Returns how many listeners are currently connected.</p></div>
-      </article>
-
-      <article class="card" id="plugin-example">
-        <div class="card-head"><h3>Full plugin example</h3></div>
-        <p class="desc">A minimal plugin registering a service, a global function, lifecycle hooks, and a log line.</p>
-        <div class="example">
-          <pre><code><span class="kw">return</span> {
-    Name = <span class="str">"MyPlugin"</span>,
-    Version = <span class="str">"1.0"</span>,
-
-    Init = <span class="kw">function</span>(self, api)
-        api:RegisterService(<span class="str">"CoolService"</span>, {
-            DoThing = <span class="kw">function</span>(x) <span class="kw">return</span> x * 2 <span class="kw">end</span>,
-        })
-
-        api:RegisterFunction(<span class="str">"shout"</span>, <span class="kw">function</span>(msg)
-            print(string.upper(msg))
-        <span class="kw">end</span>)
-
-        api:Log(<span class="str">"Ready"</span>)
-
-        api:OnBeforeExecute(<span class="kw">function</span>(plr, code)
-            <span class="cmt">-- fires before every user execution</span>
-        <span class="kw">end</span>)
-
-        api:OnAfterExecute(<span class="kw">function</span>(plr, success, elapsed, err)
-            <span class="cmt">-- fires after every execution</span>
-        <span class="kw">end</span>)
-    <span class="kw">end</span>,
-}</code></pre>
-        </div>
-      </article>
+      <div id="content-plugin"></div>
     </section>
 
   </main>
 </div>
 
 <script>
-  (function initTheme(){
-    var saved = null;
-    try { saved = localStorage.getItem('otm-theme'); } catch (e) {}
-    if (saved === 'light' || saved === 'dark') {
-      document.documentElement.setAttribute('data-theme', saved);
+const DATA = {
+  restricted: [
+    "TeleportService","DataStoreService","ServerScriptService","MarketplaceService",
+    "MemoryStoreService","HttpService","MessagingService","ReplicatedStorage",
+    "ReplicatedFirst","StarterPlayer","Teams","MaterialService"
+  ],
+
+  services: [
+    {
+      id: "svc-otm", name: "OTM", desc: "Root engine service — the entry point for retrieving every other service.",
+      methods: [
+        { sig: "GetService(serviceName)", returns: "Table", desc: "", params: [{ name: "serviceName", type: "String", desc: "Returns the requested service." }] },
+        { sig: "GetServices()", returns: "Table", desc: "Lists all current services.", params: [] },
+        { sig: "FindService(serviceName)", returns: "Table | nil", desc: "", params: [{ name: "serviceName", type: "String", desc: "Same as GetService, but returns nil instead of erroring if it doesn't exist." }] }
+      ],
+      example: `local dss = otm:GetService(ServiceName) -- gets the requested service
+local allServices = otm:GetServices() -- gets all existing services
+local serviceExists = otm:FindService(ServiceName) -- nil if it doesn't exist`
+    },
+    {
+      id: "svc-datastore", name: "OTM:DataStoreService", desc: "The sandbox-safe replacement for Roblox's DataStoreService.",
+      methods: [
+        { sig: "GetDataStore(name)", returns: "Datastore", desc: "", params: [{ name: "name", type: "String", desc: "Returns the datastore named SERVERNAME_YOURNAME." }] }
+      ],
+      example: `local dss = otm:GetService("OTM:DataStoreService")
+local mainStore = dss:GetDataStore("mainStore")
+
+game.Players.PlayerAdded:Connect(function(plr)
+    mainStore:SetAsync(plr.UserId, true) -- true when the player joins
+end)
+
+game.Players.PlayerRemoving:Connect(function(plr)
+    mainStore:SetAsync(plr.UserId, false) -- false when the player leaves
+end)`
+    },
+    {
+      id: "svc-engine", name: "OTM:EngineService", desc: "The engine's main core service — session and load-state info.",
+      methods: [
+        { sig: "InMapEditor()", returns: "Bool", desc: "Returns whether the current session is in the map editor.", params: [] },
+        { sig: "IsServerLoaded()", returns: "Bool", desc: "Returns whether the server has fully finished loading.", params: [] },
+        { sig: "WebhookEnabled()", returns: "Bool", desc: "Returns whether a webhook has been set up on the server.", params: [] }
+      ],
+      example: `local engine = otm:GetService("OTM:EngineService")
+
+if engine:InMapEditor() then
+    return -- skip gameplay logic while in the map editor
+end
+
+if engine:IsServerLoaded() and engine:WebhookEnabled() then
+    print("Server ready, webhook logging is active.")
+end`
+    },
+    {
+      id: "svc-marketplace", name: "OTM:MarketplaceService", desc: "Prompts and asset-ownership checks, mirroring Roblox's MarketplaceService.",
+      methods: [
+        { sig: "PromptGamepass(player, gamepassId)", returns: "None", desc: "Prompts the given Roblox gamepass to the user.", params: [] },
+        { sig: "PromptProduct(player, productId)", returns: "None", desc: "Prompts the given Roblox developer product to the user.", params: [] },
+        { sig: "UserOwnsGamepass(userId, gamepassId)", returns: "Bool", desc: "Checks whether the Roblox user owns the given gamepass.", params: [] },
+        { sig: "UserOwnsAsset(player, assetId)", returns: "Bool", desc: "Checks whether the Roblox user owns the given asset.", params: [] },
+        { sig: "PromptPremiumPurchase(player)", returns: "None", desc: "Prompts the user to purchase Roblox Premium.", params: [] },
+        { sig: "ImportPaidContent(rpmId)", returns: "None", badges: ["wip"], desc: "Inserts a paid RPM asset via a custom ID.", params: [] },
+        { sig: "GetPaidContentInfo(rpmId)", returns: "Table", badges: ["wip"], desc: "Returns info for a paid RPM asset via its custom ID.", params: [] },
+        { sig: "UserOwnsPaidContent(player, rpmId)", returns: "Bool", badges: ["wip"], desc: "Returns whether the asset is owned.", params: [] }
+      ],
+      example: `local mps = otm:GetService("OTM:MarketplaceService")
+local player = game.Players.Unknownblocky
+local gamepassId = 0
+local productId = 0
+local rpmId = 0
+local assetId = 0
+
+local ownsGamepass = mps:UserOwnsGamepass(player.UserId, gamepassId)
+local ownsAsset = mps:UserOwnsPaidContent(player, rpmId)
+
+mps:PromptGamepass(player, gamepassId)
+mps:PromptProduct(player, productId)
+mps:PromptPremiumPurchase(player)
+
+if ownsAsset then
+    local asset = mps:ImportPaidContent(rpmId)
+    local assetInfo = mps:GetPaidContentInfo(rpmId)
+    local ownsAssetV2 = mps:UserOwnsAsset(player, assetId)
+    print(asset)
+    print(assetInfo)
+end`
+    },
+    {
+      id: "svc-workshop", name: "OTM:WorkshopService", desc: "OTM engine's workshop / marketplace service for community-made products.",
+      methods: [
+        { sig: "GetAllProducts()", returns: "Table", desc: "Returns every product listed on the workshop.", params: [] },
+        { sig: "UploadAsset(data)", returns: "None", desc: "Uploads a custom model to the workshop.", params: [] },
+        { sig: "GetProductInfo(productName, creator)", returns: "Table", desc: "Returns info about the given product.", params: [] },
+        { sig: "GetUserProducts(player)", returns: "Table", desc: "Returns every product created by that user.", params: [] },
+        { sig: "PromptAssetPurchase(player, productData)", returns: "None", desc: "Prompts a purchase for the given asset.", params: [] }
+      ],
+      example: `local workshop = otm:GetService("OTM:WorkshopService")
+local products = workshop:GetAllProducts()
+print("#products:", #products)`
+    },
+    {
+      id: "svc-insert", name: "OTM:InsertService", desc: "Loads catalog content into the game.",
+      methods: [
+        { sig: "LoadAsset(assetId)", returns: "Model", desc: "Loads the given asset (must be a free, on-sale catalog model).", params: [] },
+        { sig: "GetFreeModelsAsync(searchText, pageNumber)", returns: "Table", desc: "Returns free models matching the search text and page.", params: [] },
+        { sig: "GetFreeDecalsAsync(searchText, pageNumber)", returns: "Table", desc: "Returns free decals matching the search text and page.", params: [] }
+      ],
+      example: `local insert = otm:GetService("OTM:InsertService")
+local model = insert:LoadAsset(0) -- asset id here`
+    },
+    {
+      id: "svc-notification", name: "OTM:NotificationService", desc: "Server announcements and on-screen messages.",
+      methods: [
+        { sig: "SendAnnouncement(player, message)", returns: "None", desc: "Sends a server-wide announcement, attributed to the given player.", params: [] },
+        { sig: "SendRPMessage(player, message, duration)", returns: "None", desc: "Sends an on-screen RP message (same style as the megaphone).", params: [] },
+        { sig: "SendClientNotification(player, message, timeAmount, type)", returns: "None", desc: "", params: [{ name: "type", type: "String", desc: "One of Success, Error, Information, Warning." }] }
+      ],
+      example: `local notifyService = otm:GetService("OTM:NotificationService")
+local player = game.Players.Unknownblocky
+
+notifyService:SendAnnouncement(player, "Hello world!")
+notifyService:SendRPMessage(player, "Hello world!", 3)
+notifyService:SendClientNotification(player, "Hello world!", 3, "Success")`
+    },
+    {
+      id: "svc-moderation", name: "OTM:ModerationService", desc: "Bans, unbans, and admin/moderation history.",
+      methods: [
+        { sig: "BanAsync(banner, userId, duration, reason)", returns: "None", desc: "Bans the given user.", params: [] },
+        { sig: "UnbanAsync(userId)", returns: "None", desc: "Unbans the given user.", params: [] },
+        { sig: "ModerationHistory(userId)", returns: "Table", desc: "Returns the user's moderation history.", params: [] },
+        { sig: "IsAdmin(player)", returns: "String | nil", desc: "Returns the user's admin rank, or nil if none.", params: [] },
+        { sig: "UserBannedAsync(userId)", returns: "Bool", desc: "Returns whether the user is currently banned.", params: [] },
+        { sig: "OnUserBan(userId, duration, reason)", returns: "", badges: ["wip"], desc: "Event — fires with a user's ban details.", params: [] }
+      ],
+      example: `local modService = otm:GetService("OTM:ModerationService")
+local plr = game.Players.Unknownblocky
+local userId = plr.UserId
+local banDuration = 3600 -- 1 hour, in seconds
+local banReason = "OTM STUDIOS"
+
+local isAdmin = modService:IsAdmin(plr)
+print(isAdmin) -- e.g. "OTM Staff"
+
+modService:BanAsync(plr, userId, banDuration, banReason)
+modService:UnbanAsync(userId)
+modService:ModerationHistory(userId)
+modService:UserBannedAsync(userId)
+
+modService.OnUserBan:Connect(function(bannedUserId, duration, reason)
+    local username = game.Players:GetNameFromUserId(bannedUserId)
+    print(username .. " was banned for:", duration, "Reason:", reason)
+end)`
+    },
+    {
+      id: "svc-addon", name: "OTM:AddonService", desc: "Connects your script to installed paid add-ons.",
+      methods: [
+        { sig: "GetAddon(name)", returns: "Table", desc: "Imports the given add-on's functions/events into your script.", params: [] },
+        { sig: "AddonEnabled(name)", returns: "Bool", badges: ["wip"], desc: "Checks if the server currently has the add-on enabled — useful for checking whether it's running or owned.", params: [] },
+        { sig: "GetAddonInfo(name)", returns: "Table", badges: ["wip"], desc: "Returns info about the given add-on.", params: [] },
+        { sig: "RestartAddon(name)", returns: "None", badges: ["wip", "paid"], desc: "Restarts the given add-on. Errors if you don't own it.", params: [] },
+        { sig: "StopAddon(name)", returns: "None", badges: ["wip", "paid"], desc: "Stops the given add-on. Errors if you don't own it.", params: [] },
+        { sig: "StartAddon(name)", returns: "None", badges: ["wip", "paid"], desc: "Starts the given add-on. Errors if you don't own it.", params: [] }
+      ],
+      example: `local addonService = otm:GetService("OTM:AddonService")
+local currentAddon = "test_addon"
+
+local testAddon = addonService:GetAddon(currentAddon)
+local addonEnabled = addonService:AddonEnabled(currentAddon)
+local addonInfo = addonService:GetAddonInfo(currentAddon)
+
+print(addonEnabled) -- true/false: enabled (owned)
+print(addonInfo) -- {Creator = "D4RK", Price = 0, Description = "Hello world!"}
+
+if addonEnabled then
+    addonService:StopAddon(currentAddon)
+end
+
+addonService:StartAddon(currentAddon)
+addonService:RestartAddon(currentAddon)
+
+testAddon.Changed:Connect(function(arg1) -- add-ons expose their own functions/events
+    print(arg1)
+end)`
+    },
+    {
+      id: "svc-http", name: "OTM:HTTPService", desc: "Sandbox-safe HTTP requests and encoding utilities.",
+      methods: [
+        { sig: "PostAsync(url, data, contentType, compress, headers)", returns: "None", desc: "Posts data to a URL.", params: [] },
+        { sig: "GetAsync(url, noCache, headers)", returns: "None", desc: "Gets data from a URL.", params: [] },
+        { sig: "GenerateGUID(wrapInBraces)", returns: "String", desc: "Returns a random unique string every call.", params: [] },
+        { sig: "JSONEncode(data)", returns: "String", desc: "Encodes a table as a JSON string.", params: [] },
+        { sig: "JSONDecode(data)", returns: "Table", desc: "Decodes a JSON string back to its original table.", params: [] },
+        { sig: "UrlEncode(input)", returns: "String", desc: "URL-encodes the given string.", params: [] }
+      ],
+      example: `local http = otm:GetService("OTM:HTTPService")
+local randomString = http:GenerateGUID(false)
+-- e.g. "a9f8d72f87asmg8d8ics"
+
+local encoded = http:JSONEncode({ hello = "world" })
+local decoded = http:JSONDecode(encoded)`
+    },
+    {
+      id: "svc-starterpack", name: "OTM:StarterPack", desc: "Manages what players spawn with.",
+      methods: [
+        { sig: "AddItem(toolName, amount)", returns: "None", desc: "Adds the tool to the game's StarterPack.", params: [] },
+        { sig: "RemoveItem(toolName)", returns: "None", desc: "Removes the tool from the StarterPack.", params: [] },
+        { sig: "FindItem(toolName)", returns: "Bool", desc: "Checks whether the item exists in the StarterPack.", params: [] },
+        { sig: "AddOneTimeItem(toolName, amount)", returns: "None", desc: "Gives the item to a character only once per player. Passing \"cash\"/\"bank\" with an amount grants cash instead.", params: [] },
+        { sig: "RemoveOneTimeItem(toolName)", returns: "None", desc: "Removes the item from the one-time list.", params: [] },
+        { sig: "FindOneTimeItem(toolName)", returns: "Bool", desc: "Checks whether the item exists in the one-time list.", params: [] }
+      ],
+      example: `local starterPack = otm:GetService("OTM:StarterPack")
+local item = game.ReplicatedStorage["g17"]
+
+local foundItem = starterPack:FindItem(item)
+
+if foundItem == false then
+    starterPack:AddItem(item, 30) -- spawns with a G17, 30 rounds
+    starterPack:AddOneTimeItem(item, 30) -- only given once per player
+end`
+    },
+    {
+      id: "svc-anticheat", name: "OTM:AntiCheatService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Anti-cheat flags, history, and whitelisting.",
+      methods: [
+        { sig: "IsEnabled()", returns: "Bool", desc: "Returns whether anti-cheat is toggled on. Default: true.", params: [] },
+        { sig: "GetUserFlags(userId)", returns: "Number", desc: "Returns the user's anti-cheat detection flag count.", params: [] },
+        { sig: "GetUserHistory(userId)", returns: "Table", desc: "Returns the user's anti-cheat moderation history.", params: [] },
+        { sig: "Whitelist(userId)", returns: "None", desc: "Whitelists a user, preventing them from being flagged.", params: [] }
+      ],
+      example: `local acService = otm:GetService("OTM:AntiCheat")
+local isEnabled = acService:IsEnabled()
+
+for _, player in ipairs(game.Players:GetPlayers()) do
+    local flags = acService:GetUserFlags(player.UserId)
+    local history = acService:GetUserHistory(player.UserId)
+    print(flags) -- number of anti-cheat flags on this user
+end`
+    },
+    {
+      id: "svc-messaging", name: "OTM:MessagingService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Cross-server communication.",
+      methods: [
+        { sig: "SendData(data)", returns: "", badges: ["wip"], desc: "Sends data to another server, if it's alive.", params: [] },
+        { sig: "RequestData(data)", returns: "", badges: ["wip"], desc: "Requests data from another server, if it's alive.", params: [] },
+        { sig: "AllowRequestData(serverName)", returns: "", badges: ["wip"], desc: "Allows a server to request data from this one.", params: [] },
+        { sig: "DenyRequestData(serverName)", returns: "", badges: ["wip"], desc: "Blacklists a server from requesting data.", params: [] },
+        { sig: "OnDataRecieved(serverName, data)", returns: "", badges: ["wip"], desc: "Event — fires when another server sends data to yours.", params: [] },
+        { sig: "OnRequestRecieved(serverName, request)", returns: "", badges: ["wip"], desc: "Event — fires when another server requests data (auto-denies if blacklisted).", params: [] }
+      ],
+      example: `local messageService = otm:GetService("OTM:MessagingService")`
+    },
+    {
+      id: "svc-job", name: "OTM:JobService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Job assignment and management.",
+      methods: [
+        { sig: "SetJob(jobName)", returns: "None", desc: "Sets the user's current job status.", params: [] },
+        { sig: "Fire(player)", returns: "None", desc: "Fires the user from their job, if employed.", params: [] },
+        { sig: "CreateNewJob(jobData)", returns: "None", desc: "Creates a new job.", params: [] },
+        { sig: "RemoveCurrentJob(jobName)", returns: "None", desc: "Deletes the job, if it exists.", params: [] },
+        { sig: "JobExist(jobName)", returns: "Bool", desc: "Checks whether the job exists.", params: [] },
+        { sig: "UpdateCurrentJob(jobName, jobData)", returns: "None", desc: "Updates the job's data.", params: [] }
+      ],
+      example: `local jobService = otm:GetService("OTM:JobService")`
+    },
+    {
+      id: "svc-teams", name: "OTM:Teams", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Sandbox-safe replacement for Roblox's Teams service.",
+      methods: [
+        { sig: "CreateNewTeam(teamData)", returns: "None", desc: "Creates a new team.", params: [] },
+        { sig: "RemoveCurrentTeam(teamName)", returns: "None", desc: "Removes the team, if it exists.", params: [] },
+        { sig: "FindCurrentTeam(teamName)", returns: "Table | nil", desc: "Returns the team's data, or nil.", params: [] },
+        { sig: "UpdateTeamData(teamName, teamData)", returns: "None", desc: "Updates the team's data.", params: [] },
+        { sig: "IsOnTeam(player)", returns: "Bool", desc: "Returns whether the player is on a team.", params: [] }
+      ],
+      example: `local teams = otm:GetService("OTM:Teams")`
+    },
+    {
+      id: "svc-vehicle", name: "OTM:VehicleService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Vehicle spawning, locking, and cleanup.",
+      methods: [
+        { sig: "LockVehicle(vehicle, lockStatus)", returns: "None", desc: "Locks or unlocks the vehicle.", params: [] },
+        { sig: "ExplodeVehicle(vehicle)", returns: "None", desc: "Explodes the vehicle.", params: [] },
+        { sig: "RemovePlayerVehicles(player)", returns: "None", desc: "Removes all vehicles spawned by the player.", params: [] },
+        { sig: "SpawnVehicle(vehicle, vehicleData)", returns: "None", desc: "Spawns the vehicle with custom attributes.", params: [] },
+        { sig: "LockpickCar(vehicle, lockpickStatus)", returns: "None", desc: "Sets the vehicle's current lockpick status.", params: [] },
+        { sig: "ClearAllVehicles()", returns: "None", desc: "Clears all vehicles in the workspace.", params: [] }
+      ],
+      example: `local vehicleService = otm:GetService("OTM:VehicleService")`
+    },
+    {
+      id: "svc-property", name: "OTM:PropertyService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Player-owned property management.",
+      methods: [
+        { sig: "SellProperty(propertyName)", returns: "None", desc: "Sells the property, if owned.", params: [] },
+        { sig: "GetAllProperties()", returns: "Table", desc: "Returns every property in the experience.", params: [] },
+        { sig: "GiveUserProperty(userId)", returns: "None", desc: "Gives the user the property.", params: [] },
+        { sig: "WipeStorage(propertyName)", returns: "None", desc: "Wipes all storages on the property.", params: [] },
+        { sig: "GetAllStorages(propertyName)", returns: "Table", desc: "Returns all storages on the property.", params: [] },
+        { sig: "UserOwnsProperty(propertyName)", returns: "Bool", desc: "Returns whether the user owns the property.", params: [] },
+        { sig: "GetPropertyData(propertyName)", returns: "Table", desc: "Returns the property's data, including house lock, ID, and more.", params: [] }
+      ],
+      example: `local propertyService = otm:GetService("OTM:PropertyService")`
+    },
+    {
+      id: "svc-weather", name: "OTM:WeatherService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "World weather and time-of-day control.",
+      methods: [
+        { sig: "SetWeather(weatherType)", returns: "None", desc: "Sets the current weather.", params: [] },
+        { sig: "ResetWeather()", returns: "None", desc: "Resets weather to default.", params: [] },
+        { sig: "SetTimeOfDay(timeOfDay)", returns: "None", desc: "Sets the current time of day.", params: [] },
+        { sig: "OnWeatherChanged(oldWeather, newWeather)", returns: "", desc: "Event — fires when the weather changes.", params: [] },
+        { sig: "GetTime()", returns: "Number", desc: "Returns the current in-game time.", params: [] },
+        { sig: "GetWeather()", returns: "String", desc: "Returns the current in-game weather.", params: [] },
+        { sig: "StartDisaster(disasterType)", returns: "", badges: ["wip"], desc: "Sets the current disaster.", params: [] },
+        { sig: "EndDisaster()", returns: "", badges: ["wip"], desc: "Stops the current disaster.", params: [] }
+      ],
+      example: `local weatherService = otm:GetService("OTM:WeatherService")`
+    },
+    {
+      id: "svc-award", name: "OTM:AwardService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Awards players medals for in-game actions.",
+      methods: [
+        { sig: "CreateAward(name)", returns: "None", desc: "Creates a new award.", params: [] },
+        { sig: "RemoveAward(name)", returns: "None", desc: "Removes an award, if it exists.", params: [] },
+        { sig: "GetAllRewards()", returns: "Table", desc: "Returns every award created.", params: [] },
+        { sig: "GiveAward(name, player)", returns: "None", desc: "Assigns the award to the player.", params: [] },
+        { sig: "UserHasAward(name, player)", returns: "Bool", desc: "Returns whether the player has the award.", params: [] },
+        { sig: "RewardRecieved(player, name)", returns: "", desc: "Event — fires when a reward is given.", params: [] }
+      ],
+      example: `local awardService = otm:GetService("OTM:AwardService")`
+    },
+    {
+      id: "svc-test", name: "OTM:TestService", desc: "A small debugging utility for confirming the sandbox is wired up correctly.",
+      methods: [
+        { sig: "ReturnMessage(name)", returns: "String", desc: "Echoes back whatever value is passed in — useful for a first-script sanity check.", params: [] }
+      ],
+      example: `local testService = otm:GetService("OTM:TestService")
+print(testService:ReturnMessage("Hello world!")) -- "Hello world!"`
+    },
+    {
+      id: "svc-reserved", name: "Reserved services", cardBadge: "reserved", cardBadgeLabel: "Not documented",
+      desc: "OTM:DarkService and OTM:PH are reserved namespaces in the source doc with no finished methods yet — placeholders for future services.",
+      methods: [], example: null
     }
-  })();
+  ],
 
-  function toggleTheme(){
-    const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('otm-theme', next); } catch (e) {}
-  }
+  functions: [
+    { id: "fn-getpdrank", name: "GetPDRankAsync", desc: "Returns the police department rank of the given player.", sig: "GetPDRankAsync(player)", returns: "Number",
+      example: `local plr = game.Players.Unknownblocky
+GetPDRankAsync(plr) -- returns: 3` },
+    { id: "fn-getselectedchar", name: "GetSelectedChar", desc: "Returns the currently selected character of the given player.", sig: "GetSelectedChar(player)", returns: "String | nil",
+      example: `local plr = game.Players.Unknownblocky
+GetSelectedChar(plr) -- "CharacterOne", "CharacterTwo", or nil` },
+    { id: "fn-explode", name: "Explode", desc: "Creates an explosion with custom parameters.", sig: "Explode(position, size, radius, damage)", returns: "None",
+      example: `local position = Vector3.new(0, 0, 0)
+local size = 25
+local radius = 30
+local damage = 150
 
-  const sections = document.querySelectorAll('section, article.card');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const linkMap = {};
-  navLinks.forEach(l => linkMap[l.getAttribute('href').slice(1)] = l);
+Explode(position, size, radius, damage)` },
+    { id: "fn-webhook", name: "Webhook", desc: "Sends a formatted webhook message to Discord.", sig: "Webhook(webhookURL, title, description, imageId)", returns: "None",
+      example: `OnCharacterDeath:Connect(function(player)
+    local webhookURL = "discord.com/webhookrandomstrings"
+    local title = "DEATH LOG"
+    local description = player.Name .. " has died."
+    local imageId = nil
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      if (linkMap[id] && entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        linkMap[id].classList.add('active');
+    Webhook(webhookURL, title, description, imageId)
+    -- runs every time a player dies
+end)` },
+    { id: "fn-returnusertomenu", name: "ReturnUserToMenu", desc: "Returns the given player to the RoleplayM menu.", sig: "ReturnUserToMenu(player)", returns: "None",
+      example: `local player = game.Players.Unknownblocky
+ReturnUserToMenu(player)` },
+    { id: "fn-getusercredits", name: "GetUserCredits", desc: "Returns the given user's credit balance.", sig: "GetUserCredits(userId)", returns: "Number",
+      example: `local userId = game.Players.Unknownblocky.UserId
+GetUserCredits(userId)` },
+    { id: "fn-unequiptool", name: "UnequipTool", desc: "Unequips the player's currently held tool.", sig: "UnequipTool(player, tool)", returns: "None",
+      example: `local player = game.Players.Unknownblocky
+local tool = player.Character:FindFirstChildWhichIsA("Tool")
+UnequipTool(player, tool)` },
+    { id: "fn-getcharacterdata", name: "GetCharacterData", desc: "Returns the given RP character's data.", sig: "GetCharacterData(player, rpChar)", returns: "Table",
+      example: `local player = game.Players.Unknownblocky
+local rpChar = player.CurrentChar.Value
+print(GetCharacterData(player, rpChar)) -- prints char data table` },
+    { id: "fn-setpdrank", name: "SetPDRank", desc: "Sets the given player's police department rank.", sig: "SetPDRank(player, rank)", returns: "None",
+      example: `local player = game.Players.Unknownblocky
+local rank = 3
+SetPDRank(player, rank) -- sets rank to 3 (military)` },
+    { id: "fn-setcharacterkill", name: "SetCharacterKill", desc: "Sets the server's current character-kill state — a.k.a. \"Realistic RP.\"", sig: "SetCharacterKill(toggle)", returns: "None",
+      example: `local ckToggle = true
+SetCharacterKill(ckToggle) -- turns character kill on` },
+    { id: "fn-loadcharacter", name: "LoadCharacter", desc: "Reloads the given player's RP character.", sig: "LoadCharacter(player, tpBack)", returns: "None",
+      example: `local player = game.Players.Unknownblocky
+
+LoadCharacter(player) -- respawns character
+LoadCharacter(player, true) -- respawns at original position` },
+{ id: "fn-isplayerrigged", name: "IsPlayerRigged", desc: "Checks if the player is loaded in fully.", sig: "IsPlayerRigged(player)", returns: "None",
+      example: `local player = game.Players.Unknownblocky
+
+IsPlayerRigged(player) -- checks if the player is fully loaded in with a character otherwise returns false.` }
+  ],
+
+  events: [
+    { id: "ev-onbulletshot", name: "OnBulletShot", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Fires when a bullet is shot in the world.", sig: "OnBulletShot:Connect(function(player, tool, hit))",
+      example: `local whitelistedDevs = {"Unknownblocky", "Zeolah"}
+local blacklistedTools = {"Taser"}
+
+OnBulletShot:Connect(function(player, tool, hit)
+    if hit == nil then return end
+    if table.find(blacklistedTools, tool.Name) then return end
+
+    if table.find(whitelistedDevs, player.Name) then
+        Explode(hit, 25, 30, 150) -- exploding bullets for devs
+    end
+end)` },
+    { id: "ev-oncharacterdeath", name: "OnCharacterDeath", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Fires when a player's currently selected character dies.", sig: "OnCharacterDeath:Connect(function(player))",
+      example: `OnCharacterDeath:Connect(function(player)
+    if player.Name == "Unknownblocky" then
+        print("OTM Staff has died.")
+    end
+end)` },
+    { id: "ev-oncharacterloaded", name: "OnCharacterLoaded", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Fires when a player's currently selected character (re)spawns.", sig: "OnCharacterLoaded:Connect(function(player))",
+      example: `OnCharacterLoaded:Connect(function(player)
+    if player.Name == "Unknownblocky" then
+        print("OTM Staff has loaded in.")
+    end
+end)` },
+    { id: "ev-onragdoll", name: "OnRagdoll", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Fires when a player's character ragdolls.", sig: "OnRagdoll:Connect(function(player, ragdollValue))",
+      example: `OnRagdoll:Connect(function(player, ragdollValue)
+    if player.Name == "Unknownblocky" and ragdollValue == true then
+        print("OTM Staff has ragdolled.")
+    end
+end)` }
+  ],
+
+  addonEvents: [
+    {
+      id: "addon-doordash", name: "DoorDash", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Food-delivery job add-on.",
+      initializer: `local addonService = otm:GetService("OTM:AddonService")
+local ddAddon = addonService:GetAddon("Doordash_Script")`,
+      events: [
+        { sig: "OnFoodDelivered(player, cash)", desc: "Fires when a player finishes delivering food to an NPC." },
+        { sig: "RecievedOrder(player, npc)", desc: "Fires when a player receives an order from an NPC." },
+        { sig: "Applied(player)", desc: "Fires when a player starts the job." },
+        { sig: "Leave(player)", desc: "Fires when a player leaves the job." },
+        { sig: "Timeup(player)", desc: "Fires when a player fails to deliver in time." }
+      ],
+      example: `ddAddon.OnFoodDelivered:Connect(function(player, cash)
+    print(player, cash)
+end)
+
+ddAddon.RecievedOrder:Connect(function(player, npc)
+    print(player, npc)
+end)
+
+ddAddon.Applied:Connect(function(player)
+    print(player)
+end)
+
+ddAddon.Leave:Connect(function(player)
+    print(player)
+end)
+
+ddAddon.Timeup:Connect(function(player)
+    print(player)
+end)`
+    },
+    {
+      id: "addon-playmusic", name: "Play Music", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "In-world music playback add-on.",
+      initializer: `local addonService = otm:GetService("OTM:AddonService")
+local musicAddon = addonService:GetAddon("PlayMusic")`,
+      events: [
+        { sig: "Toggled(player, toggle)", desc: "Fires when a user turns the music on or off." },
+        { sig: "Changed(player, newId, oldId)", desc: "Fires when a user changes the music ID." },
+        { sig: "VolumeChanged(player, newVolume, oldVolume)", desc: "Fires when a user changes the volume." },
+        { sig: "MinDistanceChanged(player, newDistance, oldDistance)", desc: "Fires when a user changes the minimum audible distance." },
+        { sig: "MaxDistanceChanged(player, newDistance, oldDistance)", desc: "Fires when a user changes the maximum audible distance." },
+        { sig: "PlaybackSpeedChanged(player, newSpeed, oldSpeed)", desc: "Fires when a user changes the playback speed." },
+        { sig: "PitchChanged(player, newPitch, oldPitch)", desc: "Fires when a user changes the pitch." }
+      ],
+      example: `musicAddon.Toggled:Connect(function(player, toggle)
+    print(player, toggle)
+end)
+
+musicAddon.Changed:Connect(function(player, newId, oldId)
+    print(player, newId, oldId)
+end)
+
+musicAddon.VolumeChanged:Connect(function(player, newVolume, oldVolume)
+    print(player, newVolume, oldVolume)
+end)
+
+musicAddon.MinDistanceChanged:Connect(function(player, newDistance, oldDistance)
+    print(player, newDistance, oldDistance)
+end)
+
+musicAddon.MaxDistanceChanged:Connect(function(player, newDistance, oldDistance)
+    print(player, newDistance, oldDistance)
+end)
+
+musicAddon.PlaybackSpeedChanged:Connect(function(player, newSpeed, oldSpeed)
+    print(player, newSpeed, oldSpeed)
+end)
+
+musicAddon.PitchChanged:Connect(function(player, newPitch, oldPitch)
+    print(player, newPitch, oldPitch)
+end)`
+    }
+  ],
+
+  plugin: [
+    {
+      id: "plugin-api", name: "Plugin API", desc: "Methods available on the api argument passed into a plugin's Init(self, api).",
+      methods: [
+        { sig: "RegisterService(name, impl)", returns: "None", desc: "Registers a table as an OTM service, callable via otm:GetService(name).", params: [] },
+        { sig: "RegisterFunction(name, func)", returns: "None", desc: "Adds a global function available inside every executed script.", params: [] },
+        { sig: "RegisterEvent(name, existingEvent)", returns: "OTMEvent", desc: "Creates (or wraps) a named event, retrievable via otm:GetEvent(name).", params: [] },
+        { sig: "GetEvent(name)", returns: "OTMEvent | nil", desc: "Returns a previously registered event, or nil.", params: [] },
+        { sig: "OnBeforeExecute(fn)", returns: "None", desc: "Registers a hook that fires right before every user execution, receiving the player and their code.", params: [] },
+        { sig: "OnAfterExecute(fn)", returns: "None", desc: "Registers a hook that fires right after every execution, receiving the player, success, elapsed time, and error.", params: [] },
+        { sig: "Log(msg)", returns: "None", desc: "Prints a message tagged with the plugin's name.", params: [] },
+        { sig: "Warn(msg)", returns: "None", desc: "Warns a message tagged with the plugin's name.", params: [] }
+      ],
+      example: null
+    },
+    {
+      id: "plugin-event", name: "Event Object", desc: "Returned by api:RegisterEvent, otm:CreateEvent, and otmEvent.new — the same event type used throughout the engine.",
+      methods: [
+        { sig: "Connect(callback)", returns: "Connection", desc: "Runs the callback every time the event fires.", params: [] },
+        { sig: "Once(callback)", returns: "Connection", desc: "Runs the callback the next time the event fires, then disconnects itself.", params: [] },
+        { sig: "Wait()", returns: "...", desc: "Yields the current thread until the event fires, then returns its arguments.", params: [] },
+        { sig: "Fire(...)", returns: "None", desc: "Fires the event, running every connected callback with the given arguments.", params: [] },
+        { sig: "DisconnectAll()", returns: "None", desc: "Disconnects every listener on the event.", params: [] },
+        { sig: "GetConnectionCount()", returns: "Number", desc: "Returns how many listeners are currently connected.", params: [] }
+      ],
+      example: null
+    },
+    {
+      id: "plugin-example", name: "Full plugin example", desc: "A minimal plugin registering a service, a global function, lifecycle hooks, and a log line.",
+      methods: [],
+      example: `return {
+    Name = "MyPlugin",
+    Version = "1.0",
+
+    Init = function(self, api)
+        api:RegisterService("CoolService", {
+            DoThing = function(x) return x * 2 end,
+        })
+
+        api:RegisterFunction("shout", function(msg)
+            print(string.upper(msg))
+        end)
+
+        api:Log("Ready")
+
+        api:OnBeforeExecute(function(plr, code)
+            -- fires before every user execution
+        end)
+
+        api:OnAfterExecute(function(plr, success, elapsed, err)
+            -- fires after every execution
+        end)
+    end,
+}`
+    }
+  ]
+};
+
+const LUA_KEYWORDS = new Set(["local","function","end","if","then","else","elseif","return","true","false","nil","for","in","do","while","repeat","until","and","or","not","break","continue"]);
+
+function escapeHtml(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function highlightLua(code){
+  let out = "";
+  let i = 0;
+  const n = code.length;
+  while(i < n){
+    const ch = code[i];
+    if(ch === "-" && code[i+1] === "-"){
+      let j = code.indexOf("\n", i);
+      if(j === -1) j = n;
+      out += '<span class="cmt">' + escapeHtml(code.slice(i,j)) + "</span>";
+      i = j;
+      continue;
+    }
+    if(ch === '"' || ch === "'"){
+      const quote = ch;
+      let j = i+1;
+      while(j < n && code[j] !== quote){
+        if(code[j] === "\\") j++;
+        j++;
       }
-    });
-  }, { rootMargin: '-10% 0px -80% 0px' });
-
-  sections.forEach(s => { if (s.id) observer.observe(s); });
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        revealObserver.unobserve(entry.target);
+      j = Math.min(j+1, n);
+      out += '<span class="str">' + escapeHtml(code.slice(i,j)) + "</span>";
+      i = j;
+      continue;
+    }
+    if(/[A-Za-z_]/.test(ch)){
+      let j = i+1;
+      while(j < n && /[A-Za-z0-9_]/.test(code[j])) j++;
+      const word = code.slice(i,j);
+      if(LUA_KEYWORDS.has(word)){
+        out += '<span class="kw">' + escapeHtml(word) + "</span>";
+      } else if(code[j] === "("){
+        out += '<span class="fname">' + escapeHtml(word) + "</span>";
+      } else {
+        out += escapeHtml(word);
       }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('article.card').forEach(c => revealObserver.observe(c));
-
-  navLinks.forEach(l => l.addEventListener('click', () => {
-    document.getElementById('sidebar').classList.remove('open');
-  }));
-
-  function filterNav(){
-    const q = document.getElementById('search').value.toLowerCase().trim();
-    navLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      link.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
-    });
-    document.querySelectorAll('.nav-group').forEach(group => {
-      const visible = group.querySelectorAll('.nav-link:not([style*="display: none"])').length;
-      group.style.display = visible ? 'block' : 'none';
-    });
+      i = j;
+      continue;
+    }
+    out += escapeHtml(ch);
+    i++;
   }
+  return out;
+}
+
+function badgeHtml(type){
+  const labels = { wip: "WIP", paid: "Owner-only", reserved: "Not documented" };
+  return '<span class="badge ' + type + '">' + labels[type] + "</span>";
+}
+
+function cardBadgeHtml(type, label){
+  if(!type) return "";
+  return '<span class="badge ' + type + '">' + escapeHtml(label) + "</span>";
+}
+
+function exampleBlock(code, label){
+  if(!code) return "";
+  return '<div class="example"><div class="example-label">' + (label || "Example") + '</div><pre><code>' + highlightLua(code) + "</code></pre></div>";
+}
+
+function paramsTable(params){
+  if(!params || params.length === 0) return "";
+  let rows = "";
+  for(const p of params){
+    rows += "<tr><td>" + escapeHtml(p.name) + '</td><td class="type">' + escapeHtml(p.type) + "</td><td>" + escapeHtml(p.desc) + "</td></tr>";
+  }
+  return '<table class="params"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>' + rows + "</tbody></table>";
+}
+
+function methodBlock(m){
+  const badges = (m.badges || []).map(badgeHtml).join(" ");
+  const returns = m.returns ? '<span class="returns">' + escapeHtml(m.returns) + "</span>" : "";
+  const desc = m.desc ? '<p class="mdesc">' + m.desc + "</p>" : "";
+  return '<div class="method"><div class="sig-row"><span class="sig">' + escapeHtml(m.sig) + '</span><span class="sig-badges">' + returns + " " + badges + "</span></div>" + desc + paramsTable(m.params) + "</div>";
+}
+
+function serviceCard(s){
+  const badge = " " + cardBadgeHtml(s.cardBadge, s.cardBadgeLabel);
+  const methods = (s.methods || []).map(methodBlock).join("");
+  return '<article class="card" id="' + s.id + '"><div class="card-head"><h3>' + escapeHtml(s.name) + "</h3>" + badge + '</div><p class="desc">' + s.desc + "</p>" + methods + exampleBlock(s.example) + "</article>";
+}
+
+function functionCard(f){
+  const returns = f.returns ? '<span class="returns">' + escapeHtml(f.returns) + "</span>" : "";
+  return '<article class="card" id="' + f.id + '"><div class="card-head"><h3>' + escapeHtml(f.name) + '</h3></div><p class="desc">' + f.desc + '</p><div class="sig-row"><span class="sig">' + escapeHtml(f.sig) + "</span>" + returns + "</div>" + exampleBlock(f.example) + "</article>";
+}
+
+function eventCard(e){
+  const badge = " " + cardBadgeHtml(e.cardBadge, e.cardBadgeLabel);
+  return '<article class="card" id="' + e.id + '"><div class="card-head"><h3>' + escapeHtml(e.name) + "</h3>" + badge + '</div><p class="desc">' + e.desc + '</p><div class="sig-row"><span class="sig">' + escapeHtml(e.sig) + "</span></div>" + exampleBlock(e.example) + "</article>";
+}
+
+function addonEventCard(a){
+  const badge = " " + cardBadgeHtml(a.cardBadge, a.cardBadgeLabel);
+  const evs = a.events.map(ev => '<div class="method"><div class="sig-row"><span class="sig">' + escapeHtml(ev.sig) + '</span></div><p class="mdesc">' + ev.desc + "</p></div>").join("");
+  return '<article class="card" id="' + a.id + '"><div class="card-head"><h3>' + escapeHtml(a.name) + "</h3>" + badge + '</div><p class="desc">' + a.desc + "</p>" +
+    '<div class="method">' + exampleBlock(a.initializer, "Initializer") + "</div>" + evs + exampleBlock(a.example, "Example — all events") + "</article>";
+}
+
+function pluginCard(p){
+  const methods = (p.methods || []).map(methodBlock).join("");
+  return '<article class="card" id="' + p.id + '"><div class="card-head"><h3>' + escapeHtml(p.name) + '</h3></div><p class="desc">' + p.desc + "</p>" + methods + exampleBlock(p.example) + "</article>";
+}
+
+function navLink(id, label, wip){
+  return '<a class="nav-link" href="#' + id + '">' + escapeHtml(label) + (wip ? ' <span class="nav-flag">WIP</span>' : "") + "</a>";
+}
+
+function render(){
+  document.getElementById("restricted-list").innerHTML = DATA.restricted.map(r => '<div class="restricted-item">' + escapeHtml(r) + "</div>").join("");
+
+  document.getElementById("nav-services").innerHTML = DATA.services.map(s => navLink(s.id, s.name, s.cardBadge === "wip")).join("");
+  document.getElementById("content-services").innerHTML = DATA.services.map(serviceCard).join("");
+
+  document.getElementById("nav-functions").innerHTML = DATA.functions.map(f => navLink(f.id, f.name, false)).join("");
+  document.getElementById("content-functions").innerHTML = DATA.functions.map(functionCard).join("");
+
+  document.getElementById("nav-events").innerHTML = DATA.events.map(e => navLink(e.id, e.name, e.cardBadge === "wip")).join("");
+  document.getElementById("content-events").innerHTML = DATA.events.map(eventCard).join("");
+
+  document.getElementById("nav-addonevents").innerHTML = DATA.addonEvents.map(a => navLink(a.id, a.name, a.cardBadge === "wip")).join("");
+  document.getElementById("content-addonevents").innerHTML = DATA.addonEvents.map(addonEventCard).join("");
+
+  document.getElementById("nav-plugin").innerHTML = DATA.plugin.map(p => navLink(p.id, p.name, false)).join("");
+  document.getElementById("content-plugin").innerHTML = DATA.plugin.map(pluginCard).join("");
+}
+
+render();
+
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem("otm-theme"); } catch (e) {}
+  if (saved === "light" || saved === "dark") {
+    document.documentElement.setAttribute("data-theme", saved);
+  }
+})();
+
+function toggleTheme(){
+  const current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+  const next = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("otm-theme", next); } catch (e) {}
+}
+
+const sections = document.querySelectorAll("section, article.card");
+const navLinks = document.querySelectorAll(".nav-link");
+const linkMap = {};
+navLinks.forEach(l => linkMap[l.getAttribute("href").slice(1)] = l);
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const id = entry.target.id;
+    if (linkMap[id] && entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove("active"));
+      linkMap[id].classList.add("active");
+    }
+  });
+}, { rootMargin: "-10% 0px -80% 0px" });
+
+sections.forEach(s => { if (s.id) observer.observe(s); });
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("in-view");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll("article.card").forEach(c => revealObserver.observe(c));
+
+navLinks.forEach(l => l.addEventListener("click", () => {
+  document.getElementById("sidebar").classList.remove("open");
+}));
+
+function filterNav(){
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  navLinks.forEach(link => {
+    const text = link.textContent.toLowerCase();
+    link.style.display = (!q || text.includes(q)) ? "flex" : "none";
+  });
+  document.querySelectorAll(".nav-group").forEach(group => {
+    const visible = group.querySelectorAll('.nav-link:not([style*="display: none"])').length;
+    group.style.display = visible ? "block" : "none";
+  });
+}
 </script>
 
 </body>
