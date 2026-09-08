@@ -491,14 +491,14 @@ local model = insert:LoadAsset(0) -- asset id here`
     {
       id: "svc-notification", name: "OTM:NotificationService", desc: "Server announcements and on-screen messages.",
       methods: [
-        { sig: "SendAnnouncement(player, message)", returns: "None", desc: "Sends a server-wide announcement, attributed to the given player.", params: [] },
+        { sig: "SendAnnouncement(message)", returns: "None", desc: "Sends a server-wide announcement.", params: [] },
         { sig: "SendRPMessage(player, message, duration)", returns: "None", desc: "Sends an on-screen RP message (same style as the megaphone).", params: [] },
         { sig: "SendClientNotification(player, message, timeAmount, type)", returns: "None", desc: "", params: [{ name: "type", type: "String", desc: "One of Success, Error, Information, Warning." }] }
       ],
       example: `local notifyService = otm:GetService("OTM:NotificationService")
 local player = game.Players.Unknownblocky
 
-notifyService:SendAnnouncement(player, "Hello world!")
+notifyService:SendAnnouncement("Hello world!")
 notifyService:SendRPMessage(player, "Hello world!", 3)
 notifyService:SendClientNotification(player, "Hello world!", 3, "Success")`
     },
