@@ -466,7 +466,7 @@ if ownsAsset then
 end`
     },
     {
-      id: "svc-workshop", name: "OTM:WorkshopService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "OTM engine's workshop / marketplace service for community-made products.",
+      id: "svc-workshop", name: "OTM:WorkshopService", desc: "OTM engine's workshop / marketplace service for community-made products.",
       methods: [
         { sig: "GetAllProducts()", returns: "Table", desc: "Returns every product listed on the workshop.", params: [] },
         { sig: "UploadAsset(data)", returns: "None", desc: "Uploads a custom model to the workshop.", params: [] },
@@ -493,7 +493,7 @@ local model = insert:LoadAsset(0) -- asset id here`
       methods: [
         { sig: "SendAnnouncement(message)", returns: "None", desc: "Sends a server-wide announcement.", params: [] },
         { sig: "SendRPMessage(player, message, duration)", returns: "None", desc: "Sends an on-screen RP message (same style as the megaphone).", params: [] },
-        { sig: "SendClientNotification(player, message, timeAmount, type)", returns: "None", desc: "", params: [{ name: "type", type: "String", desc: "One of Success, Error, Information, Warning." }] }
+        { sig: "SendClientNotification(player, message, timeAmount, typeOf)", returns: "None", desc: "", params: [{ name: "typeOf", type: "String", desc: "One of Success, Error, Information, Warning." }] }
       ],
       example: `local notifyService = otm:GetService("OTM:NotificationService")
 local player = game.Players.Unknownblocky
@@ -535,7 +535,7 @@ end)`
       id: "svc-addon", name: "OTM:AddonService", desc: "Connects your script to installed paid add-ons.",
       methods: [
         { sig: "GetAddon(name)", returns: "Table", desc: "Imports the given add-on's functions/events into your script.", params: [] },
-        { sig: "AddonEnabled(name)", returns: "Bool", badges: ["wip"], desc: "Checks if the server currently has the add-on enabled — useful for checking whether it's running or owned.", params: [] },
+        { sig: "AddonEnabled(name)", returns: "Bool", desc: "Checks if the server currently has the add-on enabled — useful for checking whether it's running or owned.", params: [] },
         { sig: "GetAddonInfo(name)", returns: "Table", badges: ["wip"], desc: "Returns info about the given add-on.", params: [] },
         { sig: "RestartAddon(name)", returns: "None", badges: ["wip", "paid"], desc: "Restarts the given add-on. Errors if you don't own it.", params: [] },
         { sig: "StopAddon(name)", returns: "None", badges: ["wip", "paid"], desc: "Stops the given add-on. Errors if you don't own it.", params: [] },
@@ -582,7 +582,7 @@ local decoded = http:JSONDecode(encoded)`
     {
       id: "svc-starterpack", name: "OTM:StarterPack", desc: "Manages what players spawn with.",
       methods: [
-        { sig: "AddItem(toolName, amount)", returns: "None", desc: "Adds the tool to the game's StarterPack.", params: [] },
+        { sig: "AddItem(toolName, data)", returns: "None", desc: "Adds the tool to the game's StarterPack.", params: [] },
         { sig: "RemoveItem(toolName)", returns: "None", desc: "Removes the tool from the StarterPack.", params: [] },
         { sig: "FindItem(toolName)", returns: "Bool", desc: "Checks whether the item exists in the StarterPack.", params: [] },
         { sig: "AddOneTimeItem(toolName, amount)", returns: "None", desc: "Gives the item to a character only once per player. Passing \"cash\"/\"bank\" with an amount grants cash instead.", params: [] },
@@ -605,7 +605,7 @@ end`
         { sig: "IsEnabled()", returns: "Bool", desc: "Returns whether anti-cheat is toggled on. Default: true.", params: [] },
         { sig: "GetUserFlags(userId)", returns: "Number", desc: "Returns the user's anti-cheat detection flag count.", params: [] },
         { sig: "GetUserHistory(userId)", returns: "Table", desc: "Returns the user's anti-cheat moderation history.", params: [] },
-        { sig: "Whitelist(userId)", returns: "None", desc: "Whitelists a user, preventing them from being flagged.", params: [] }
+        { sig: "Whitelist(userId)", returns: "Table", desc: "Whitelists a user, preventing them from being flagged.", params: [] }
       ],
       example: `local acService = otm:GetService("OTM:AntiCheat")
 local isEnabled = acService:IsEnabled()
@@ -619,10 +619,10 @@ end`
     {
       id: "svc-messaging", name: "OTM:MessagingService", cardBadge: "wip", cardBadgeLabel: "In progress", desc: "Cross-server communication.",
       methods: [
-        { sig: "SendData(data)", returns: "", badges: ["wip"], desc: "Sends data to another server, if it's alive.", params: [] },
-        { sig: "RequestData(data)", returns: "", badges: ["wip"], desc: "Requests data from another server, if it's alive.", params: [] },
-        { sig: "AllowRequestData(serverName)", returns: "", badges: ["wip"], desc: "Allows a server to request data from this one.", params: [] },
-        { sig: "DenyRequestData(serverName)", returns: "", badges: ["wip"], desc: "Blacklists a server from requesting data.", params: [] },
+        { sig: "SendData(data)", returns: "None", badges: ["wip"], desc: "Sends data to another server, if it's alive.", params: [{ name: "data", type: "String | Table", desc: "The data to send." }] },
+        { sig: "RequestData(data)", returns: "None", badges: ["wip"], desc: "Requests data from another server, if it's alive.", params: [{ name: "data", type: "String | Table", desc: "The request to send." }] },
+        { sig: "AllowRequestData(serverName)", returns: "None", badges: ["wip"], desc: "Allows a server to request data from this one.", params: [] },
+        { sig: "DenyRequestData(serverName)", returns: "None", badges: ["wip"], desc: "Blacklists a server from requesting data.", params: [] },
         { sig: "OnDataRecieved(serverName, data)", returns: "", badges: ["wip"], desc: "Event — fires when another server sends data to yours.", params: [] },
         { sig: "OnRequestRecieved(serverName, request)", returns: "", badges: ["wip"], desc: "Event — fires when another server requests data (auto-denies if blacklisted).", params: [] }
       ],
@@ -685,8 +685,8 @@ end`
         { sig: "OnWeatherChanged(oldWeather, newWeather)", returns: "", desc: "Event — fires when the weather changes.", params: [] },
         { sig: "GetTime()", returns: "Number", desc: "Returns the current in-game time.", params: [] },
         { sig: "GetWeather()", returns: "String", desc: "Returns the current in-game weather.", params: [] },
-        { sig: "StartDisaster(disasterType)", returns: "", badges: ["wip"], desc: "Sets the current disaster.", params: [] },
-        { sig: "EndDisaster()", returns: "", badges: ["wip"], desc: "Stops the current disaster.", params: [] }
+        { sig: "StartDisaster(disasterType)", returns: "None", badges: ["wip"], desc: "Sets the current disaster.", params: [] },
+        { sig: "EndDisaster()", returns: "None", badges: ["wip"], desc: "Stops the current disaster.", params: [] }
       ],
       example: `local weatherService = otm:GetService("OTM:WeatherService")`
     },
@@ -767,11 +767,11 @@ SetCharacterKill(ckToggle) -- turns character kill on` },
 
 LoadCharacter(player) -- respawns character
 LoadCharacter(player, true) -- respawns at original position` },
-{ id: "fn-isplayerrigged", name: "IsPlayerRigged", desc: "Checks if the player is loaded in fully.", sig: "IsPlayerRigged(player)", returns: "None",
+    { id: "fn-isplayerrigged", name: "IsPlayerRigged", desc: "Checks if the player is loaded in fully.", sig: "IsPlayerRigged(player)", returns: "None",
       example: `local player = game.Players.Unknownblocky
 
 IsPlayerRigged(player) -- checks if the player is fully loaded in with a character otherwise returns false.` },
-{ id: "fn-setpeacetime", name: "SetPeaceTime", desc: "Sets the servers peace time status.", sig: "SetPeaceTime(Bool)", returns: "None",
+    { id: "fn-setpeacetime", name: "SetPeaceTime", desc: "Sets the servers peace time status.", sig: "SetPeaceTime(Bool)", returns: "None",
       example: `SetPeaceTime(true) -- Turns peace time on preventing players from shooting.` }
   ],
 
