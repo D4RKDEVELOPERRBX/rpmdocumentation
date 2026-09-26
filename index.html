@@ -731,13 +731,13 @@ local radius = 30
 local damage = 150
 
 Explode(position, size, radius, damage)` },
-    { id: "fn-webhook", name: "Webhook", desc: "Sends a formatted webhook message to Discord.", sig: "Webhook(title, description, imageId)", returns: "None",
+    { id: "fn-webhook", name: "Webhook", desc: "Sends a formatted webhook message to Discord.", sig: "Webhook(title, description, color)", returns: "None",
       example: `OnCharacterDeath:Connect(function(player)
     local title = "DEATH LOG"
     local description = player.Name .. " has died."
-    local imageId = nil
+    local color = Color3.fromRGB(255,0,0)
 
-    Webhook(title, description, imageId)
+    Webhook(title, description, color)
     -- runs every time a player dies
 end)` },
     { id: "fn-returnusertomenu", name: "ReturnUserToMenu", desc: "Returns the given player to the RoleplayM menu.", sig: "ReturnUserToMenu(player)", returns: "None",
